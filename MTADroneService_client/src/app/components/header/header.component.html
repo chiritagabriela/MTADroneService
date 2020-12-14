@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <link rel="shortcut icon" type="image/x-icom" href="/assets/images/sigla_atm.jpg" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
+    
+        <link rel="stylesheet" href="/assets/css/open-iconic-bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/animate.css">
+        
+        <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+
+        <link rel="stylesheet" href="/assets/css/aos.css">
+
+        <link rel="stylesheet" href="/assets/css/ionicons.min.css">
+
+        <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="/assets/css/jquery.timepicker.css">
+
+        
+        <link rel="stylesheet" href="/assets/css/flaticon.css">
+        <link rel="stylesheet" href="/assets/css/icomoon.css">
+       
+  </head>
+  <body>
+    
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="">MTADroneService</a>
+      <img src="/assets/images/sigla_atm_buna.png" class="img-fluid" alt="" style='width:10%;height: 10%;'>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="#" class="nav-link" routerLink="/home">Home</a></li>
+          <li class="nav-item" *ngIf="loggedIn"><a href="#" class="nav-link"routerLink="/services">Services</a></li>
+          <li class="nav-item" *ngIf="loggedIn"><a href="#" class="nav-link"routerLink="/history">History</a></li>
+          <li class="nav-item"><a href="#footer" class="nav-link" >Contact</a></li>
+          <li class="nav-item cta" *ngIf="loggedIn"><a href="#" class="nav-link" (click)="logoutClick($event)">Logout</a></li>
+          <li class="nav-item cta" *ngIf="!loggedIn"><a href="#" class="nav-link"routerLink="/login"><span>Login now</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <div class="hero-wrap js-fullheight">
+      <div class="overlay"></div>
+      <div id="particles-js"></div>
+      <div class="container" >
+        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <h1><strong>Internet of Flying Things<br></strong> is right here!</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-light">
+    <section class="ftco-section-featured ftco-animate">
+      <div class="container-fluid" data-scrollax-parent="true">
+        <div class="row no-gutters d-flex align-items-center" data-scrollax=" properties: { translateY: '-30%'}">
+
+          <div class="col-md-3 mb-3">
+            <a href="#" class="featured-img">
+              <div class="text-1 p-4 d-flex align-items-center">
+                <h3>Delivery drone<br><span class="tag"></span></h3>
+              </div>
+              <img src="/assets/images/purpose_delivery.jpg" class="img-fluid" alt="">
+              <div class="text p-4 d-flex align-items-center">
+                <div class="user d-flex align-items-center">
+                </div>
+              </div>
+            </a>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="row no-gutters">
+              <div class="col-md-12">
+                <div class="row no-gutters d-flex align-items-end">
+
+                  <div class="col-md-8">
+                    <a href="#" class="featured-img">
+                      <div class="text-1 p-4 d-flex align-items-center">
+                        <h3>Agriculture drone<br><span class="tag"></span></h3>
+                      </div>
+                      <img src="/assets/images/purpose_agriculture.jpg" class="img-fluid" alt="">
+                      <div class="text p-4 d-flex align-items-center">
+                        <div class="user d-flex align-items-center">
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-4">
+                    <a href="#" class="featured-img">
+                      <div class="text-1 p-4 d-flex align-items-center">
+                        <h3>Search and rescue drone<br><span class="tag"></span></h3>
+                      </div>
+                      <img src="/assets/images/purpose_sar.png" class="img-fluid" alt="">
+                      <div class="text p-4 d-flex align-items-center">
+                        <div class="user d-flex align-items-center">
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="row no-gutters d-flex align-items-start">
+                  <div class="col-md-8">
+                    <a href="#" class="featured-img">
+                      <div class="text-1 p-4 d-flex align-items-center">
+                        <h3>Terrain surveillance drone<br><span class="tag"></span></h3>
+                      </div>
+                      <img src="/assets/images/purpose_terrainSurveillance.jpg" class="img-fluid" alt="">
+                      <div class="text p-4 d-flex align-items-center">
+                        <div class="user d-flex align-items-center">
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="#" class="featured-img">
+                      <div class="text-1 p-4 d-flex align-items-center">
+                        <h3>Traffic surveillance drone<br><span class="tag"></span></h3>
+                      </div>
+                      <img src="/assets/images/purpose_trafficSurveillance.jpg" class="img-fluid" alt="">
+                      <div class="text p-4 d-flex align-items-center">
+                        <div class="user d-flex align-items-center">
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <a href="#" class="featured-img">
+              <div class="text-1 p-4 d-flex align-items-center">
+                <h3>Storm tracking drone<br><span class="tag"></span></h3>
+              </div>
+              <img src="/assets/images/purpose_stormTracking.jpg" class="img-fluid" alt="">
+              <div class="text p-4 d-flex align-items-center">
+                <div class="user d-flex align-items-center">
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>      
+    </body>
+  </html>
+    

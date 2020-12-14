@@ -1,0 +1,40 @@
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <div class="col-md-4" style="height: 400px;">
+            <div class="card p-3 py-4 mt-5 mb-5" style="height: 500px;">
+                <div class="text-center"> <img src="assets/images/medical.jpg" width="200" height="150" class="rounded-circle">
+                    <h3 class="mt-2">Delivery</h3>
+                    <div class="group"> <label for="pass" class="label">Latitude pick-up point</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <div class="group"> <label for="pass" class="label">Longitude pick-up point</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <div class="group"> <label for="pass" class="label">Latitude delivery point</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <div class="group"> <label for="pass" class="label">Longitude delivery point</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <button style="background-color: #157FBE;" type="submit" class="btn btn-info">Send drone!</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 py-4 mt-5" style="height: 500px;">
+                <div class="text-center"> <img src="assets/images/sar.jpg" width="200" height="150" class="rounded-circle">
+                    <h3 class="mt-2">Search and rescue</h3> 
+                    <div class="group"> <label for="pass" class="label">Latitude to search person</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <div class="group"> <label for="pass" class="label">Longitude to search person</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <form action="/action_page.php">
+                        <input style="position: relative;left: 50px;top:22px"  type="file" id="myFile" name="filename">
+                      </form>
+                    <button style="background-color: #157FBE;top:74px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 py-4 mt-5" style="height: 500px;">
+                <div class="text-center"> <img src="assets/images/terrain.jpg" width="200" height="150" class="rounded-circle">
+                    <h3 class="mt-2">Terrain surveillance</h3>
+                    <div class="group"> <label for="pass" class="label">Latitude to surveil terrain</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <div class="group"> <label for="pass" class="label">Longitude to surveil terrain</label> <input id="pass" type="text" class="input" data-type="text"> </div>
+                    <p>Note that this is the center of a x meters square.</p>
+                    <button style="background-color: #157FBE;top:59px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+:root {
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #78d5ef;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    
+.padd-section {
+    padding-top: 50px;
+    padding-bottom: 50px
+}
+
+.section-title {
+    margin-bottom: 0px
+}
+
+#pricing .block-pricing {
+    background: #fff;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 4px 0 rgba(0, 0, 0, 0.19);
+    display: inline-block;
+    position: relative;
+    width: 100%
+}
+
+#pricing .block-pricing .table {
+    margin-bottom: 0;
+    padding: 30px 15px;
+    max-width: 100%;
+    width: 100%
+}
+
+#pricing .block-pricing .table h4 {
+    padding-bottom: 30px
+}
+
+h4 {
+    color: #000;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 2
+}
+
+#pricing .block-pricing h2 {
+    margin-bottom: 30px
+}
+
+h2 {
+    color: #000;
+    font-weight: 600
+}
+
+#pricing .block-pricing ul {
+    list-style: outside none none;
+    margin: 10px auto;
+    max-width: 240px;
+    padding: 0
+}
+
+#pricing .block-pricing ul li {
+    border-bottom: 1px solid rgba(153, 153, 153, 0.3);
+    padding: 12px 0;
+    text-align: center
+}
+
+li {
+    color: #626262;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 30px;
+    text-transform: capitalize
+}
+
+#pricing .block-pricing .table .table_btn a {
+    background: #ff7361;
+    color: #fff;
+    margin: 0;
+    display: inline-block
+}
+
+.btn {
+    border: 1px solid #fff;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 15px 40px;
+    text-transform: uppercase;
+    -moz-transition: all 0.5s ease-in-out 0s;
+    -ms-transition: all 0.5s ease-in-out 0s;
+    -o-transition: all 0.5s ease-in-out 0s;
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s
+}
