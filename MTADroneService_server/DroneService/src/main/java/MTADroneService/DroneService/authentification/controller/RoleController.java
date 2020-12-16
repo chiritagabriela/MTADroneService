@@ -2,6 +2,7 @@ package MTADroneService.DroneService.authentification.controller;
 
 import MTADroneService.DroneService.authentification.dtos.RoleDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/role*")
 public class RoleController {
 
+    @PreAuthorize("hasAnyRole('USER','ANONYMOUS')")
     @PostMapping("/create")
     public RoleDTO createRole(@RequestBody RoleDTO roleDTO){
 
