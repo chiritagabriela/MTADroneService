@@ -10,14 +10,16 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 import static java.util.Objects.isNull;
 
 @Data
 @Document(collection = "user")
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class UserModel implements Serializable, Persistable<String> {
+public class UserModel extends GenericUserModel{
 
 
     @Indexed(direction = IndexDirection.DESCENDING, unique = true)
@@ -26,40 +28,11 @@ public class UserModel implements Serializable, Persistable<String> {
     private String password;
     private String droneID;
     private String authToken;
+    private List<String> roles;
 
-    @Id
-    private String userID;
 
-    public String getDroneID() {
-        return droneID;
-    }
-
-    public void setDroneID(String droneID) {
-        this.droneID = droneID;
-    }
-
-    public String getAuthToken() {
-        return authToken;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public UserModel(String username, String password, String droneID, String authToken) {
-        this.username = username;
-        this.password = password;
-        this.droneID = droneID;
-        this.authToken = authToken;
-        this.userID = UUID.randomUUID().toString();
+    public UserModel() {
+        super();
     }
 
     public String getUsername() {
@@ -78,12 +51,27 @@ public class UserModel implements Serializable, Persistable<String> {
         this.password = password;
     }
 
-    public String getId() {
-        return userID;
+    public String getDroneID() {
+        return droneID;
     }
 
-    @Override
-    public boolean isNew() {
-        return isNull(this.username);
+    public void setDroneID(String droneID) {
+        this.droneID = droneID;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

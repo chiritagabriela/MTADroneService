@@ -5,9 +5,29 @@
                 <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
                     <div class="login-space">
                         <div class="login">
-                            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                                <div style="font: black !important;"class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input"> </div>
-                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password"> </div>
+                            <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text"
+                                           formControlName="username"
+                                           class="form-control"
+                                           [ngClass]="{ 'is-invalid': submitted && fLogin.username.errors }" />
+                                    <div *ngIf="submitted && fLogin.username.errors"
+                                         class="invalid-feedback">
+                                        <div *ngIf="fLogin.username.errors.required">Username is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password"
+                                           formControlName="password"
+                                           class="form-control"
+                                           [ngClass]="{ 'is-invalid': submitted && fLogin.password.errors }" />
+                                    <div *ngIf="submitted && fLogin.password.errors"
+                                         class="invalid-feedback">
+                                        <div *ngIf="fLogin.password.errors.required">Password is required</div>
+                                    </div>
+                                </div>                        
                                 <div class="group"> <input type="submit" class="button" value="Sign In"> </div>
                                 <div class="hr"></div>
                             </form>
@@ -17,10 +37,32 @@
                             <button style="top:-115px;position: relative;left: 120px;" type="button" class="btn btn-link">Forgot password?</button>
                         </div>
                         <div class="sign-up-form">
-                            <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input"> </div>
-                            <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password"> </div>
-                            <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" > </div>
-                            <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
+                            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text"
+                                           formControlName="usernameRegister"
+                                           class="form-control"
+                                           [ngClass]="{ 'is-invalid': submitted && fRegister.usernameRegister.errors }" />
+                                    <div *ngIf="submitted && fRegister.usernameRegister.errors"
+                                         class="invalid-feedback">
+                                        <div *ngIf="fRegister.usernameRegister.errors.required">Username is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password"
+                                           formControlName="passwordRegister"
+                                           class="form-control"
+                                           [ngClass]="{ 'is-invalid': submitted && fRegister.passwordRegister.errors }" />
+                                    <div *ngIf="submitted && fRegister.passwordRegister.errors"
+                                         class="invalid-feedback">
+                                        <div *ngIf="fRegister.passwordRegister.errors.required">Password is required</div>
+                                    </div>
+                                </div>                        
+                                <div class="group"> <input type="submit" class="button" value="Sign up"> </div>
+                                <div class="hr"></div>
+                            </form>
                             <div class="hr"></div>
                             <div class="foot"> <label for="tab-1">Already Member?</label> </div>
                         </div>

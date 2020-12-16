@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthentificationService } from '../../services/authentification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +10,77 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm:FormGroup;
-  constructor() { }
+  loginForm!: FormGroup;
+  registerForm!: FormGroup;
+  submitted = false;
+
+  constructor(private formBuilder: FormBuilder, private authentificationService: AuthentificationService,
+    private router: Router) {
+     
+      if(this.authentificationService.currentUserValue !== null 
+        && this.authentificationService.currentUserValue !== undefined){
+          this.router.navigate(['/home']);
+        }
+
+  }
+
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      username: ['',Validators.required],
+      password: ['',Validators.required]
+    });
     
+    this.registerForm = this.formBuilder.group({
+      usernameRegister: ['',Validators.required],
+      passwordRegister: ['',Validators.required]
+    });
   }
 
-  onSubmit(){
-
-  }
-
-  get f(){
+  get fLogin(){
     return this.loginForm.controls;
+  }
+
+  get fRegister(){
+    return this.registerForm.controls;
+  }
+
+  onSubmitLogin(){
+    
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.authentificationService.login(this.fLogin.username.value,this.fLogin.password.value)
+    .subscribe(
+      data => {
+        console.log("succes");
+        this.router.navigate(['/home']);
+      },
+      error =>{
+        console.log("error");
+      }
+    );
+
+  }
+  onSubmitRegister(){
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    this.authentificationService.register(this.registerForm.value)
+    .subscribe(
+      data => {
+        this.router.navigate(['/home']);
+      },
+      error =>{
+        alert(`Registration failed!${error.messagge}`);
+      }
+    );
   }
 
 }

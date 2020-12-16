@@ -24,6 +24,7 @@
     "angular-particle": "^1.0.4",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
+    "ngx-cookie-service": "^11.0.2",
     "ngx-markdown": "^11.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

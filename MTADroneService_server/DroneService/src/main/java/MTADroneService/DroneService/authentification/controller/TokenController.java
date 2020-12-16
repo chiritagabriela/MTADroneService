@@ -14,6 +14,7 @@ public class TokenController {
 
     @Autowired
     TokenService tokenService;
+    
     @GetMapping("/validate")
     public void validateToken(HttpServletRequest httpServletRequest) throws Exception{
         tokenService.validateToken("");
