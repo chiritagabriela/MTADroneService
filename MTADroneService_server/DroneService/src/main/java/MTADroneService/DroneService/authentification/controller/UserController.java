@@ -30,7 +30,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('USER')")
     public UserInfoDTO getUserInfo(@PathVariable String userId)
     {
-        return userService.retriveUserInfo(userId);
+        return userService.retrieveUserInfo(userId);
     }
 
     @PostMapping("/login")

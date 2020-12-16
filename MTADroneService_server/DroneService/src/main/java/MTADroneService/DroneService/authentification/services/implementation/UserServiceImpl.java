@@ -47,13 +47,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoDTO retriveUserInfo(String userId) {
+    public UserInfoDTO retrieveUserInfo(String userId) {
         Optional<UserModel> userModelOptional = userDAO.findById(userId);
-        if(userModelOptional.isPresent())
-        {
-            return modelMapper.map(userModelOptional.get(), UserInfoDTO.class);
-        }
-        return null;
+        return userModelOptional.map(userModel -> modelMapper.map(userModel, UserInfoDTO.class)).orElse(null);
     }
 
     @Override

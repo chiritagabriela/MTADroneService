@@ -17,8 +17,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static sun.util.locale.LocaleUtils.isEmpty;
+
 
 public class AuthFilter extends AbstractAuthenticationProcessingFilter {
 

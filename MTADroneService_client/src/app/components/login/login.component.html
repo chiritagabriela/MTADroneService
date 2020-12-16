@@ -41,23 +41,23 @@
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="text"
-                                           formControlName="usernameRegister"
+                                           formControlName="username"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && fRegister.usernameRegister.errors }" />
-                                    <div *ngIf="submitted && fRegister.usernameRegister.errors"
+                                           [ngClass]="{ 'is-invalid': submitted && fRegister.username.errors }" />
+                                    <div *ngIf="submitted && fRegister.username.errors"
                                          class="invalid-feedback">
-                                        <div *ngIf="fRegister.usernameRegister.errors.required">Username is required</div>
+                                        <div *ngIf="fRegister.username.errors.required">Username is required</div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password"
-                                           formControlName="passwordRegister"
+                                           formControlName="password"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && fRegister.passwordRegister.errors }" />
-                                    <div *ngIf="submitted && fRegister.passwordRegister.errors"
+                                           [ngClass]="{ 'is-invalid': submitted && fRegister.password.errors }" />
+                                    <div *ngIf="submitted && fRegister.password.errors"
                                          class="invalid-feedback">
-                                        <div *ngIf="fRegister.passwordRegister.errors.required">Password is required</div>
+                                        <div *ngIf="fRegister.password.errors.required">Password is required</div>
                                     </div>
                                 </div>                        
                                 <div class="group"> <input type="submit" class="button" value="Sign up"> </div>

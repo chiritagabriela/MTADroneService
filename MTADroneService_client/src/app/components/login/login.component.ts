@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     });
     
     this.registerForm = this.formBuilder.group({
-      usernameRegister: ['',Validators.required],
-      passwordRegister: ['',Validators.required]
+      username: ['',Validators.required],
+      password: ['',Validators.required]
     });
   }
 
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       error =>{
-        alert(`Registration failed!${error.messagge}`);
+        alert(`Registration failed! ${error.messagge}`);
       }
     );
   }

@@ -16,7 +16,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-import static sun.util.locale.LocaleUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 
 @Component
 public class MTADroneServiceAuthProvider extends AbstractUserDetailsAuthenticationProvider {

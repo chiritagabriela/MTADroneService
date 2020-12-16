@@ -24,16 +24,10 @@ public class UserModel extends GenericUserModel{
 
     @Indexed(direction = IndexDirection.DESCENDING, unique = true)
     private String username;
-
     private String password;
     private String droneID;
     private String authToken;
     private List<String> roles;
-
-
-    public UserModel() {
-        super();
-    }
 
     public String getUsername() {
         return username;
