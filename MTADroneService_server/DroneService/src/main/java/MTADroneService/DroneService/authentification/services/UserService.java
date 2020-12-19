@@ -1,9 +1,13 @@
 package MTADroneService.DroneService.authentification.services;
 
 import MTADroneService.DroneService.authentification.dtos.UserInfoDTO;
+import org.apache.catalina.User;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import java.io.IOException;
 
 public interface UserService {
-    public void createUser(UserInfoDTO userInfoDTO);
-    public UserInfoDTO loginUser(UserInfoDTO userInfoDTO);
-    public UserInfoDTO retrieveUserInfo(String userId);
+    void createUser(UserInfoDTO userInfoDTO);
+    UserInfoDTO loginUser(UserInfoDTO userInfoDTO);
 }

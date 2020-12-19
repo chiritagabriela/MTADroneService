@@ -1,5 +1,6 @@
 package MTADroneService.DroneService.authentification.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,55 +18,17 @@ import static java.util.Objects.isNull;
 
 @Data
 @Document(collection = "user")
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class UserModel extends GenericUserModel{
-
+@AllArgsConstructor
+public class UserModel {
 
     @Indexed(direction = IndexDirection.DESCENDING, unique = true)
     private String username;
+
     private String password;
     private String droneID;
-    private String authToken;
+    private String jwtToken;
     private List<String> roles;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getDroneID() {
-        return droneID;
-    }
-
-    public void setDroneID(String droneID) {
-        this.droneID = droneID;
-    }
-
-    public String getAuthToken() {
-        return authToken;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
+    private String userID;
+    private String email;
 }

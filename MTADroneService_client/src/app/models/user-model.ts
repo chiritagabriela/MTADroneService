@@ -14,4 +14,5 @@ export class UserModel{
     droneID:string = "";
     authToken:string = "";
     userID:string = "";
+    email:string="";
 }

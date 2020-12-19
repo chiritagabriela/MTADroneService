@@ -5,13 +5,27 @@ import MTADroneService.DroneService.authentification.dtos.UserInfoDTO;
 import MTADroneService.DroneService.authentification.models.UserModel;
 import MTADroneService.DroneService.authentification.services.TokenService;
 import MTADroneService.DroneService.authentification.services.UserService;
+import com.sun.jdi.connect.Transport;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -32,25 +46,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(UserInfoDTO userInfoDTO) {
 
+        List<String> roles = new ArrayList<>();
+        roles.add("USER");
+        roles.add("ANONYMOUS");
         checkNotNull(userInfoDTO.getPassword());
-        System.out.println(userInfoDTO.getUsername());
-        System.out.println(userInfoDTO.getUserID());
-        System.out.println(userInfoDTO.getPassword());
-        System.out.println(userInfoDTO.getDroneID());
+
         UserModel userModel = modelMapper.map(userInfoDTO, UserModel.class);
         userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
 
         tokenService.generateNewToken(userModel);
+        userModel.setRoles(roles);
 
         userDAO.save(userModel);
+        userInfoDTO.setPassword("");
         modelMapper.map(userModel, userInfoDTO);
     }
 
-    @Override
-    public UserInfoDTO retrieveUserInfo(String userId) {
-        Optional<UserModel> userModelOptional = userDAO.findById(userId);
-        return userModelOptional.map(userModel -> modelMapper.map(userModel, UserInfoDTO.class)).orElse(null);
-    }
 
     @Override
     public UserInfoDTO loginUser(UserInfoDTO userInfoDTO) {
@@ -67,8 +78,5 @@ public class UserServiceImpl implements UserService {
         else{
             throw new BadCredentialsException("Username or password is incorrect.");
         }
-
     }
-
-
 }

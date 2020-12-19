@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   registerForm!: FormGroup;
+
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, private authentificationService: AuthentificationService,
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
     
     this.registerForm = this.formBuilder.group({
       username: ['',Validators.required],
-      password: ['',Validators.required]
+      password: ['',Validators.required],
+      email: ['',Validators.required]
     });
   }
 
@@ -65,6 +67,7 @@ export class LoginComponent implements OnInit {
     );
 
   }
+
   onSubmitRegister(){
     this.submitted = true;
 
@@ -78,9 +81,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       error =>{
-        alert(`Registration failed! ${error.messagge}`);
+        alert(`Registration failed! ${error.message}`);
       }
     );
   }
-
 }

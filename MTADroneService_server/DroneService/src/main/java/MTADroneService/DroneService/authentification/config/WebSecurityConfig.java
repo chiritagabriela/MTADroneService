@@ -40,8 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         OrRequestMatcher orRequestMatcher = new OrRequestMatcher(
                 new AntPathRequestMatcher("/user/**"),
-                new AntPathRequestMatcher("/token/**"),
-                new AntPathRequestMatcher("/role/**")
+                new AntPathRequestMatcher("/token/**")
         );
 
         AuthFilter authFilter = new AuthFilter(orRequestMatcher);

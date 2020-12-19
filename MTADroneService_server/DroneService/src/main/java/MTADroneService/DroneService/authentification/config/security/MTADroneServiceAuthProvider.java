@@ -34,14 +34,14 @@ public class MTADroneServiceAuthProvider extends AbstractUserDetailsAuthenticati
     }
 
     @Override
-    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        final String token = (String) authentication.getCredentials();
+    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentification) throws AuthenticationException {
+        final String token = (String) authentification.getCredentials();
 
         if (isEmpty(token)) {
             return new User(username, "", AuthorityUtils.createAuthorityList("ROLE_ANONYMOUS"));
         }
 
-        Optional<UserModel> userModelOptional = userDAO.findByAuthToken(token);
+        Optional<UserModel> userModelOptional = userDAO.findByJwtToken(token);
 
         if (userModelOptional.isPresent()) {
             final UserModel userModel = userModelOptional.get();
@@ -49,7 +49,7 @@ public class MTADroneServiceAuthProvider extends AbstractUserDetailsAuthenticati
             try {
                 tokenService.validateToken(token);
             } catch (InvalidTokenException e) {
-                userModel.setAuthToken(null);
+                userModel.setJwtToken(null);
                 userDAO.save(userModel);
                 return null;
             }

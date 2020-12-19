@@ -37,6 +37,6 @@ public class TokenServiceImpl implements TokenService {
                 .setSubject(userModel.getUsername())
                 .signWith(authSigningKeyResolver.getSecretKey(), SignatureAlgorithm.HS512)
                 .compact();
-        userModel.setAuthToken(jwtToken);
+        userModel.setJwtToken(jwtToken);
     }
 }

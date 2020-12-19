@@ -1,5 +1,6 @@
 package MTADroneService.DroneService.authentification.config.security;
 
+import MTADroneService.DroneService.authentification.models.UserModel;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,8 +34,6 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-
-
         String tokenUnstrapped = request.getHeader(AUTHORIZATION);
         String token = StringUtils.removeStart(Optional.ofNullable(tokenUnstrapped).orElse(""), "Bearer").trim();
 
@@ -50,7 +49,6 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-
         SecurityContextHolder.getContext().setAuthentication(authResult);
         chain.doFilter(request, response);
     }
@@ -63,6 +61,9 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
 
         jsonObject.put("error", failed.getCause());
         jsonObject.put("errorMessage", failed.getMessage());
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         response.getWriter().print(jsonObject.toString());
         response.getWriter().flush();
