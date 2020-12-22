@@ -10,3 +10,9 @@ jwt:
     secret:
         key: Asdasdasdasdasdsdakshvdaihsvdaisygfaisfgaiufgasoufdhyaoisfyhaopsifhy
 
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'

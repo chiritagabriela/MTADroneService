@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mtadroneservice-auth-deployment
+  labels:
+    name: mtadroneservice-auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mtadroneservice-auth
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: mtadroneservice-auth
+    spec:
+      imagePullSecrets:
+        - name:  regcred
+      containers:
+        - image:  iamgabrielachrt/mtadroneservice:auth
+          name:  mtadroneservice-auth
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8888
+          env:
+            - name:  SPRING_PROFILES_ACTIVE
+              value:  prod
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8888
+            initialDelaySeconds: 30
+            periodSeconds: 40
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8888
+            initialDelaySeconds: 30
+            periodSeconds: 40
+      restartPolicy: Always
+
+
