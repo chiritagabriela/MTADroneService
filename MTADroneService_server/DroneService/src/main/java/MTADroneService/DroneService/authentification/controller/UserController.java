@@ -62,7 +62,6 @@ public class UserController {
     public UserInfoDTO loginUser(@RequestBody UserInfoDTO userInfoDTO)
     {
         checkNotNull(userInfoDTO);
-
         return userService.loginUser(userInfoDTO);
     }
 }

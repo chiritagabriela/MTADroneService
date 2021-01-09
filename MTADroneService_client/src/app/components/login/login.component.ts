@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       error =>{
-        console.log("error");
+        alert("Username or password is incorrect.");
       }
     );
 
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       error =>{
-        alert(`Registration failed! ${error.message}`);
+        alert("Username already exists.");
       }
     );
   }

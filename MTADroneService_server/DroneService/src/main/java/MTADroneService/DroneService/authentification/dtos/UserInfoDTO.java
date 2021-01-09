@@ -16,4 +16,5 @@ public class UserInfoDTO {
     private String droneID;
     private List<String> roles;
     private String email;
+    private String userID;
 }

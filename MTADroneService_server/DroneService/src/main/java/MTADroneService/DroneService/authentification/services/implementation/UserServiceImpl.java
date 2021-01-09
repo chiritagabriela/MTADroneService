@@ -5,7 +5,7 @@ import MTADroneService.DroneService.authentification.dtos.UserInfoDTO;
 import MTADroneService.DroneService.authentification.models.UserModel;
 import MTADroneService.DroneService.authentification.services.TokenService;
 import MTADroneService.DroneService.authentification.services.UserService;
-import com.sun.jdi.connect.Transport;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
         checkNotNull(userInfoDTO.getPassword());
 
         UserModel userModel = modelMapper.map(userInfoDTO, UserModel.class);
+        userModel.setUserID(UUID.randomUUID().toString());
         userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
 
         tokenService.generateNewToken(userModel);
@@ -61,7 +62,6 @@ public class UserServiceImpl implements UserService {
         userInfoDTO.setPassword("");
         modelMapper.map(userModel, userInfoDTO);
     }
-
 
     @Override
     public UserInfoDTO loginUser(UserInfoDTO userInfoDTO) {

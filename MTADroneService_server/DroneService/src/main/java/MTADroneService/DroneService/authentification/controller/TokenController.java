@@ -28,7 +28,6 @@ public class TokenController {
         if (!isEmpty(authHeader)) {
             token = authHeader.split("\\s")[1];
         } else {
-
             return;
         }
         tokenService.validateToken(token);
