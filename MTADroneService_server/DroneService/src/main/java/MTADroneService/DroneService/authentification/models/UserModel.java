@@ -24,7 +24,6 @@ public class UserModel {
 
     @Indexed(direction = IndexDirection.DESCENDING, unique = true)
     private String username;
-
     private String password;
     private String droneID;
     private String jwtToken;

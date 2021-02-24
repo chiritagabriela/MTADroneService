@@ -21,6 +21,7 @@ public class BeanConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public CorsFilter corsFilter() {
 

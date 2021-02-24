@@ -9,8 +9,12 @@ metadata:
     nginx.ingress.kubernetes.io/limit-rps: '20'
     nginx.ingress.kubernetes.io/limit-rpm: '20'
 spec:
+  tls:
+    - hosts:
+        - mtadroneservice.mooo.com
+      secretName: mtadroneservice-cert-tls
   rules:
-    - host: mtadroneservice.com
+    - host: mtadroneservice.mooo.com
       http:
         paths:
           - path: /

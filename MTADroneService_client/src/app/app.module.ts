@@ -13,8 +13,9 @@ import { HistoryComponent } from './components/history/history.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtInterceptor } from 'src/app/classes/jwt-interceptor'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { CookieService } from 'ngx-cookie-service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [CookieService],
+  providers: [CookieService,{provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

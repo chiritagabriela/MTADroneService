@@ -1,6 +1,7 @@
 package MTADroneService.DroneService.authentification.controller;
 
 import MTADroneService.DroneService.authentification.daos.UserDAO;
+import MTADroneService.DroneService.authentification.dtos.MissionInfoDTO;
 import MTADroneService.DroneService.authentification.dtos.UserInfoDTO;
 import MTADroneService.DroneService.authentification.models.UserModel;
 import MTADroneService.DroneService.authentification.services.TokenService;
@@ -30,37 +31,22 @@ import static org.springframework.security.config.web.server.SecurityWebFiltersO
 public class UserController {
 
     private static final String UNKNOWN_USERNAME_OR_BAD_PASSWORD = "Unknown username or bad password";
-    @Autowired
-    ModelMapper modelMapper;
-
-    @Autowired
-    TokenService tokenService;
-
-    @Autowired
-    UserDAO userDAO;
 
     @Autowired
     UserService userService;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @PostMapping("/create")
     @PreAuthorize("hasAnyRole('USER','ANONYMOUS')")
     public UserInfoDTO createUser(@RequestBody UserInfoDTO userInfoDTO){
-
         checkNotNull(userInfoDTO);
-
         userService.createUser(userInfoDTO);
-
         return userInfoDTO;
     }
 
 
     @PostMapping("/login")
     @PreAuthorize("hasAnyRole('USER','ANONYMOUS')")
-    public UserInfoDTO loginUser(@RequestBody UserInfoDTO userInfoDTO)
-    {
+    public UserInfoDTO loginUser(@RequestBody UserInfoDTO userInfoDTO) {
         checkNotNull(userInfoDTO);
         return userService.loginUser(userInfoDTO);
     }

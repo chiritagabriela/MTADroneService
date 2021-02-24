@@ -4,8 +4,6 @@ import MTADroneService.DroneService.authentification.exceptions.InvalidTokenExce
 import MTADroneService.DroneService.authentification.models.UserModel;
 
 public interface TokenService {
-
     void validateToken(String jwtToken) throws InvalidTokenException;
-
     void generateNewToken(UserModel userModel);
 }

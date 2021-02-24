@@ -13,10 +13,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - mtadroneservice.com
-      secretName: drmarkdown-cert-tls
+        - mtadroneservice.mooo.com
+      secretName: mtadroneservice-cert-tls
   rules:
-    - host: mtadroneservice.com
+    - host: mtadroneservice.mooo.com
       http:
         paths:
           - path: /user/create
