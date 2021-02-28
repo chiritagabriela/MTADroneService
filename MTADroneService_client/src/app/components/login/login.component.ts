@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   registerForm!: FormGroup;
 
-  submitted = false;
+  submittedLogin = false;
+  submittedRegister = false;
 
   constructor(private formBuilder: FormBuilder, private authentificationService: AuthentificationService,
     private router: Router) {
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin(){
     
-    this.submitted = true;
+    this.submittedLogin = true;
 
     if (this.loginForm.invalid) {
       return;
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitRegister(){
-    this.submitted = true;
+    this.submittedRegister = true;
 
     if (this.registerForm.invalid) {
       return;

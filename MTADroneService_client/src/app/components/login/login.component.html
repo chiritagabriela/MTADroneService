@@ -11,8 +11,8 @@
                                     <input type="text"
                                            formControlName="username"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && fLogin.username.errors }" />
-                                    <div *ngIf="submitted && fLogin.username.errors"
+                                           [ngClass]="{ 'is-invalid': submittedLogin && fLogin.username.errors }" />
+                                    <div *ngIf="submittedLogin && fLogin.username.errors"
                                          class="invalid-feedback">
                                         <div *ngIf="fLogin.username.errors.required">Username is required</div>
                                     </div>
@@ -22,8 +22,8 @@
                                     <input type="password"
                                            formControlName="password"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && fLogin.password.errors }" />
-                                    <div *ngIf="submitted && fLogin.password.errors"
+                                           [ngClass]="{ 'is-invalid': submittedLogin && fLogin.password.errors }" />
+                                    <div *ngIf="submittedLogin && fLogin.password.errors"
                                          class="invalid-feedback">
                                         <div *ngIf="fLogin.password.errors.required">Password is required</div>
                                     </div>
@@ -39,8 +39,8 @@
                                     <input type="text"
                                            formControlName="username"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && fRegister.username.errors }" />
-                                    <div *ngIf="submitted && fRegister.username.errors"
+                                           [ngClass]="{ 'is-invalid': submittedRegister && fRegister.username.errors }" />
+                                    <div *ngIf="submittedRegister && fRegister.username.errors"
                                          class="invalid-feedback">
                                         <div *ngIf="fRegister.username.errors.required">Username is required</div>
                                     </div>
@@ -50,8 +50,8 @@
                                     <input type="password"
                                            formControlName="password"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && fRegister.password.errors }" />
-                                    <div *ngIf="submitted && fRegister.password.errors"
+                                           [ngClass]="{ 'is-invalid': submittedRegister && fRegister.password.errors }" />
+                                    <div *ngIf="submittedRegister && fRegister.password.errors"
                                          class="invalid-feedback">
                                         <div *ngIf="fRegister.password.errors.required">Password is required</div>
                                     </div>
@@ -61,8 +61,8 @@
                                     <input type="email"
                                            formControlName="email"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && fRegister.email.errors }" />
-                                    <div *ngIf="submitted && fRegister.email.errors"
+                                           [ngClass]="{ 'is-invalid': submittedRegister && fRegister.email.errors }" />
+                                    <div *ngIf="submittedRegister && fRegister.email.errors"
                                          class="invalid-feedback">
                                         <div *ngIf="fRegister.email.errors.required">Email is required</div>
                                     </div>

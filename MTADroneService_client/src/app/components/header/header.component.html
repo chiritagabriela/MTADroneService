@@ -5,7 +5,6 @@
     <link rel="shortcut icon" type="image/x-icom" href="/assets/images/sigla_atm.jpg" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/assets/css/icomoon.css">
   </head>
   <body>
     
@@ -21,8 +20,10 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active"><a href="#" class="nav-link" routerLink="/home">Home</a></li>
           <li class="nav-item" *ngIf="loggedIn"><a href="#" class="nav-link"routerLink="/services">Services</a></li>
-          <li class="nav-item" *ngIf="loggedIn"><a href="#" class="nav-link"routerLink="/history">History</a></li>
-          <li class="nav-item"><a href="#footer" class="nav-link" >Contact</a></li>
+          <li class="nav-item" *ngIf="loggedIn"><a href="#" class="nav-link" routerLink="/history">History</a></li>
+          <li class="nav-item" *ngIf="loggedIn"><a href="#" class="nav-link" routerLink="/missions">Current missions</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" routerLink="/contact">Contact</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" routerLink="/about">About</a></li>
           <li class="nav-item cta" *ngIf="loggedIn"><a href="#" class="nav-link" (click)="logoutClick($event)">Logout</a></li>
           <li class="nav-item cta" *ngIf="!loggedIn"><a href="#" class="nav-link"routerLink="/login"><span>Login now</span></a></li>
         </ul>

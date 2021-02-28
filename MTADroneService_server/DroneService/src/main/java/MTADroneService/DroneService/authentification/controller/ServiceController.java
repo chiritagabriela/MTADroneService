@@ -2,19 +2,14 @@ package MTADroneService.DroneService.authentification.controller;
 
 import MTADroneService.DroneService.authentification.dtos.MissionInfoDTO;
 import MTADroneService.DroneService.authentification.services.ServiceService;
-import MTADroneService.DroneService.authentification.services.UserService;
+import MTADroneService.DroneService.authentification.utility.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -23,28 +18,40 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Slf4j
 public class ServiceController {
 
-    private final static String UPLOADED_FOLDER = "src\\main\\resources";
-
     @Autowired
     ServiceService serviceService;
 
-    @PostMapping(value = "/search", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/search")
     @PreAuthorize("hasAnyRole('USER')")
-    public MissionInfoDTO createMission(@RequestBody MissionInfoDTO missionInfoDTO,
-                                        @RequestParam("file") MultipartFile file,
-                                        RedirectAttributes redirectAttributes) {
+    public MissionInfoDTO createSearchMission(@RequestParam String longitude,
+                                              @RequestParam String latitude,
+                                              @RequestBody MultipartFile file) throws IOException {
+
+        MissionInfoDTO missionInfoDTO = new MissionInfoDTO();
+        missionInfoDTO.setMissionLatitudeEnd(latitude);
+        missionInfoDTO.setMissionLongitudeEnd(longitude);
+        missionInfoDTO.setMissionDate(Utils.getCurrentDate());
+        missionInfoDTO.setMissionType(Utils.MissionTypes.SAR.toString());
+        serviceService.createMission(missionInfoDTO, file);
+        return missionInfoDTO;
+    }
+    @PostMapping(value = "/surveil")
+    @PreAuthorize("hasAnyRole('USER')")
+    public MissionInfoDTO createSurveilMission(@RequestBody MissionInfoDTO missionInfoDTO) throws IOException {
         checkNotNull(missionInfoDTO);
-        try {
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
+        missionInfoDTO.setMissionDate(Utils.getCurrentDate());
+        missionInfoDTO.setMissionType(Utils.MissionTypes.SURVEILLANCE.toString());
+        serviceService.createMission(missionInfoDTO, null);
+        return missionInfoDTO;
+    }
 
-            redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @PostMapping(value = "/delivery")
+    @PreAuthorize("hasAnyRole('USER')")
+    public MissionInfoDTO createDeliveryMission(@RequestBody MissionInfoDTO missionInfoDTO) throws IOException {
+        checkNotNull(missionInfoDTO);
+        missionInfoDTO.setMissionDate(Utils.getCurrentDate());
+        missionInfoDTO.setMissionType(Utils.MissionTypes.DELIVERY.toString());
+        serviceService.createMission(missionInfoDTO, null);
         return missionInfoDTO;
     }
 }

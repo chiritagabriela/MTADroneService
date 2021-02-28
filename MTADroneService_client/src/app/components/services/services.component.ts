@@ -10,60 +10,92 @@ import { DronemissionService } from 'src/app/services/dronemission.service';
 })
 export class ServicesComponent implements OnInit {
 
-  submitted = false;
+  submittedSearch = false;
+  submittedSurveill = false;
+  submittedDelivery = false;
   searchForm!:FormGroup;
   surveillanceForm!:FormGroup;
   deliveryForm!:FormGroup;
+  searchFile!: File;
 
   constructor(private router:Router, private missionDroneService:DronemissionService,
     private formBuilder: FormBuilder) {
-
   }
 
   ngOnInit(): void {
     this.deliveryForm = this.formBuilder.group({
-      longitudePickUp:['',Validators.required],
-      latitudePickUp:['',Validators.required],
-      longitudeDelivery:['',Validators.required],
-      latitudeDelivery:['',Validators.required]
+      missionLatitudeStart:['',Validators.required],
+      missionLatitudeEnd:['',Validators.required],
+      missionLongitudeStart:['',Validators.required],
+      missionLongitudeEnd:['',Validators.required],
     });
 
     this.surveillanceForm =  this.formBuilder.group({
-      longitudeSurveill:['',Validators.required],
-      latitudeSurveill:['',Validators.required]
+      missionLatitudeEnd:['',Validators.required],
+      missionLongitudeEnd:['',Validators.required]
     });
 
     this.searchForm = this.formBuilder.group({
-      longitudeSearch:['',Validators.required],
-      latitudeSearch:['',Validators.required]
+      missionLatitudeEnd:['',Validators.required],
+      missionLongitudeEnd:['',Validators.required],
+      fileField:['',Validators.required]
     });
   }
 
   onSubmitSearch(){
-    this.submitted = true;
+    this.submittedSearch = true;
 
     if (this.searchForm.invalid) {
       return;
     }
 
-    this.missionDroneService.startSearchMission(this.searchForm)
-    .subscribe(
-      data => {
-        console.log("succes");
-        this.router.navigate(['/history']);
-      },
-      error =>{
-        alert("Please reload the page.");
-      }
-    );
 
+    if (this.searchFile != null || this.searchFile != undefined) {
+      this.missionDroneService.startSearchMission(this.searchForm.value, this.searchFile)
+      .subscribe(
+        data => {
+          this.searchForm.reset();
+          console.log("succes");
+          this.router.navigate(['/history']);
+        },
+        error =>{
+          alert("Please reload the page.");
+        }
+      );
+    }
+
+  }
+
+  refreshChosenFile(files: FileList) {
+      this.searchFile = files[0];
   }
 
   onSubmitSurveillance(){
-
+    this.submittedSurveill = true;
+      this.missionDroneService.startSurveilMission(this.surveillanceForm.value)
+      .subscribe(
+        data => {
+          console.log("succes");
+         this.router.navigate(['/history']);
+        },
+        error =>{
+          alert("Please reload the page.");
+        }
+      );
   }
-  onSubmitDelivery(){
 
+  onSubmitDelivery(){
+    this.submittedDelivery = true;
+    this.missionDroneService.startDeliveryMission(this.surveillanceForm.value)
+      .subscribe(
+        data => {
+          console.log("succes");
+         this.router.navigate(['/history']);
+        },
+        error =>{
+          alert("Please reload the page.");
+        }
+      );
   }
 
   get fSearch(){

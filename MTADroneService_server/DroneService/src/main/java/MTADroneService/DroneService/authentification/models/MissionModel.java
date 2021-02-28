@@ -18,10 +18,12 @@ import java.util.List;
 public class MissionModel {
     @Indexed(direction = IndexDirection.DESCENDING, unique = true)
     String missionID;
-    DroneModel missionDrone;
+    String missionDroneID;
     String missionType;
-    String missionLongitude;
-    String missionLatitude;
+    String missionLongitudeStart;
+    String missionLatitudeEnd;
+    String missionLongitudeEnd;
+    String missionLatitudeStart;
     RetrieveInfoDrone retrieveInfoDrone;
     Date missionDate;
     String missionStatus;

@@ -10,12 +10,14 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { ServicesComponent } from './components/services/services.component';
 import { HistoryComponent } from './components/history/history.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { JwtInterceptor } from 'src/app/classes/jwt-interceptor'
+import { JwtInterceptor } from 'src/app/classes/jwt-interceptor';
+import { AboutComponent } from './components/about/about.component';
+import { MissionsComponent } from './components/missions/missions.component';
+import { ContactComponent } from './components/contact/contact.component'
 
 @NgModule({
   declarations: [
@@ -25,8 +27,10 @@ import { JwtInterceptor } from 'src/app/classes/jwt-interceptor'
     HomeComponent,
     ServicesComponent,
     HistoryComponent,
-    ContactComponent,
     LoginComponent,
+    AboutComponent,
+    MissionsComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

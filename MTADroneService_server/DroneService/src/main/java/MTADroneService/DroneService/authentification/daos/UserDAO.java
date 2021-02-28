@@ -11,5 +11,4 @@ import java.util.Optional;
 public interface UserDAO extends MongoRepository<UserModel,String> {
     Optional<UserModel> findByJwtToken(String jwtToken);
     Optional<UserModel> findByUsername(String username);
-    Optional<UserModel> findByEmail(String email);
 }

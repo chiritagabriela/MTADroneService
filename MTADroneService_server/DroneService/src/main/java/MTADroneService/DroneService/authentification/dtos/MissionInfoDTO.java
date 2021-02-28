@@ -12,10 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MissionInfoDTO {
-    String droneID;
+    String missionDroneID;
+    String missionID;
     String missionType;
-    String missionLongitude;
-    String missionLatitude;
+    String missionLongitudeStart;
+    String missionLatitudeEnd;
+    String missionLongitudeEnd;
+    String missionLatitudeStart;
     Date missionDate;
     String missionStatus;
 }

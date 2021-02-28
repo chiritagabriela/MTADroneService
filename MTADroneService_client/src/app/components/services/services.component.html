@@ -6,47 +6,47 @@
                     <div class="text-center"> <img src="assets/images/medical.jpg" width="200" height="150" class="rounded-circle">
                         <h3 class="mt-2">Delivery</h3>
                         <div class="form-group">
-                            <label for="username">Longitude pick-up</label>
+                            <label for="missionLongitudeStart">Longitude pick-up</label>
                             <input type="text"
-                                   formControlName="longitudePickUp"
+                                   formControlName="missionLongitudeStart"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fDelivery.longitudePickUp.errors }" />
-                            <div *ngIf="submitted && fDelivery.longitudePickUp.errors"
+                                   [ngClass]="{ 'is-invalid': submittedDelivery && fDelivery.missionLongitudeStart.errors }" />
+                            <div *ngIf="submittedDelivery && fDelivery.missionLongitudeStart.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fDelivery.longitudePickUp.errors.required">Longitude to pick up required!</div>
+                                <div *ngIf="fDelivery.missionLongitudeStart.errors.required">Longitude to pick up required!</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="username">Latitude pick-up</label>
+                            <label for="missionLatitudeStart">Latitude pick-up</label>
                             <input type="text"
-                                   formControlName="latitudePickUp"
+                                   formControlName="missionLatitudeStart"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fDelivery.latitudePickUp.errors }" />
-                            <div *ngIf="submitted && fDelivery.latitudePickUp.errors"
+                                   [ngClass]="{ 'is-invalid': submittedDelivery && fDelivery.missionLatitudeStart.errors }" />
+                            <div *ngIf="submittedDelivery && fDelivery.missionLatitudeStart.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fDelivery.latitudePickUp.errors.required">Latitude to pick up is required!</div>
+                                <div *ngIf="fDelivery.missionLatitudeStart.errors.required">Latitude to pick up is required!</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="username">Longitude to deliver</label>
+                            <label for="missionLongitudeEnd">Longitude to deliver</label>
                             <input type="text"
-                                   formControlName="longitudeDelivery"
+                                   formControlName="missionLongitudeEnd"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fDelivery.longitudeDelivery.errors }" />
-                            <div *ngIf="submitted && fDelivery.longitudeDelivery.errors"
+                                   [ngClass]="{ 'is-invalid': submittedDelivery && fDelivery.missionLongitudeEnd.errors }" />
+                            <div *ngIf="submittedDelivery && fDelivery.missionLongitudeEnd.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fDelivery.longitudeDelivery.errors.required">Longitude to deliver is required!</div>
+                                <div *ngIf="fDelivery.missionLongitudeEnd.errors.required">Longitude to deliver is required!</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="username">Latitude to deliver</label>
+                            <label for="missionLatitudeEnd">Latitude to deliver</label>
                             <input type="text"
-                                   formControlName="latitudeDelivery"
+                                   formControlName="missionLatitudeEnd"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fDelivery.latitudeDelivery.errors }" />
-                            <div *ngIf="submitted && fDelivery.latitudeDelivery.errors"
+                                   [ngClass]="{ 'is-invalid': submittedDelivery && fDelivery.missionLatitudeEnd.errors }" />
+                            <div *ngIf="submittedDelivery && fDelivery.missionLatitudeEnd.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fDelivery.latitudeDelivery.errors.required">Latitude to deliver is required!</div>
+                                <div *ngIf="fDelivery.missionLatitudeEnd.errors.required">Latitude to deliver is required!</div>
                             </div>
                         </div>
                         <button style="background-color: #157FBE;" type="submit" class="btn btn-info">Send drone!</button>
@@ -60,29 +60,33 @@
                     <div class="text-center"> <img src="assets/images/sar.jpg" width="200" height="150" class="rounded-circle">
                         <h3 class="mt-2">Search and rescue</h3> 
                         <div class="form-group">
-                            <label for="username">Longitude for SAR</label>
+                            <label for="missionLongitudeEnd">Longitude</label>
                             <input type="text"
-                                   formControlName="longitudeSearch"
+                                   formControlName="missionLongitudeEnd"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fSearch.longitudeSearch.errors }" />
-                            <div *ngIf="submitted && fSearch.longitudeSearch.errors"
+                                   [ngClass]="{ 'is-invalid': submittedSearch && fSearch.missionLongitudeEnd.errors }" />
+                            <div *ngIf="submittedSearch && fSearch.missionLongitudeEnd.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fSearch.longitudeSearch.errors.required">Longitude for SAR is required!</div>
+                                <div *ngIf="fSearch.missionLongitudeEnd.errors.required">Longitude is required!</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="username">Latitude for SAR</label>
+                            <label for="missionLatitudeEnd">Latitude</label>
                             <input type="text"
-                                   formControlName="latitudeSearch"
+                                   formControlName="missionLatitudeEnd"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fSearch.latitudeSearch.errors }" />
-                            <div *ngIf="submitted && fSearch.latitudeSearch.errors"
+                                   [ngClass]="{ 'is-invalid': submittedSearch && fSearch.missionLatitudeEnd.errors }" />
+                            <div *ngIf="submittedSearch && fSearch.missionLatitudeEnd.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fSearch.latitudeSearch.errors.required">Latitude for SAR is required!</div>
+                                <div *ngIf="fSearch.missionLatitudeEnd.errors.required">Latitude is required!</div>
                             </div>
                         </div>
-                        <input style="position: relative;left: 50px;top:22px"  type="file" id="myFile" name="filename">
-                        <button style="background-color: #157FBE;top:74px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
+                        <input 
+                        formControlName="fileField"
+                        class="form-control"
+                        style="position: relative;top:10px;" (change)="refreshChosenFile($event.target.files)" type="file" id="myFile" name="filename">
+                        <p style="position: relative;top:25px;">Introduce photo of missing person.</p>
+                        <button style="background-color: #157FBE;top:60px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
                     </div>
                 </form>
             </div>
@@ -93,29 +97,29 @@
                     <div class="text-center"> <img src="assets/images/terrain.jpg" width="200" height="150" class="rounded-circle">
                         <h3 class="mt-2">Terrain surveillance</h3>
                         <div class="form-group">
-                            <label for="username">Longitude for terrain surveillance</label>
+                            <label for="missionLongitudeEnd">Longitude</label>
                             <input type="text"
-                                   formControlName="longitudeSurveill"
+                                   formControlName="missionLongitudeEnd"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fSurveillance.longitudeSurveill.errors }" />
-                            <div *ngIf="submitted && fSurveillance.longitudeSurveill.errors"
+                                   [ngClass]="{ 'is-invalid': submittedSurveill && fSurveillance.missionLongitudeEnd.errors }" />
+                            <div *ngIf="submittedSurveill && fSurveillance.missionLongitudeEnd.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fSurveillance.longitudeSurveill.errors.required">Longitude for surveillance is required!</div>
+                                <div *ngIf="fSurveillance.missionLongitudeEnd.errors.required">Longitude is required!</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="username">Latitude for terrain surveillance</label>
+                            <label for="missionLatitudeEnd">Latitude</label>
                             <input type="text"
-                                   formControlName="latitudeSurveill"
+                                   formControlName="missionLatitudeEnd"
                                    class="form-control"
-                                   [ngClass]="{ 'is-invalid': submitted && fSurveillance.latitudeSurveill.errors }" />
-                            <div *ngIf="submitted && fSurveillance.latitudeSurveill.errors"
+                                   [ngClass]="{ 'is-invalid': submittedSurveill && fSurveillance.missionLatitudeEnd.errors }" />
+                            <div *ngIf="submittedSurveill && fSurveillance.missionLatitudeEnd.errors"
                                  class="invalid-feedback">
-                                <div *ngIf="fSurveillance.latitudeSurveill.errors.required">Latitude for surveillance is required!</div>
+                                <div *ngIf="fSurveillance.missionLatitudeEnd.errors.required">Latitude is required!</div>
                             </div>
                         </div>
-                        <p>Note that this is the center of a x meters square.</p>
-                        <button style="background-color: #157FBE;top:59px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
+                        <p>Point is the center of a 3 meters square.</p>
+                        <button style="background-color: #157FBE;position: relative;top:75px;" type="submit" class="btn btn-info">Send drone!</button>
                     </div>
                 </form>
             </div>

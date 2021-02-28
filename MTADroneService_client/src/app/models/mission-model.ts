@@ -3,8 +3,10 @@ export class MissionModel{
     missionID:string="";
     missionDrone:DroneModel=new DroneModel("","","");
     missionType:string="";
-    missionLongitude:string="";
-    missionLatitude:string="";
+    missionLongitudeStart:string="";
+    missionLatitudeEnd:string="";
+    missionLongitudeEnd:string="";
+    missionLatitudeStart:string="";
     missionDate:string="";
     missionStatus:string="";
 }

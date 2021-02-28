@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableMongoAuditing
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class DroneServiceApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(DroneServiceApplication.class, args);
 	}

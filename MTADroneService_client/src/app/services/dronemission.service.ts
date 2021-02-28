@@ -11,11 +11,27 @@ export class DronemissionService {
 
   constructor(private httpClient:HttpClient) { }
 
-  startSearchMission(formValue:any): Observable<MissionModel>{
-    const url = "http://localhost:8888/services/search";
-    return this.httpClient.post<MissionModel>(url,formValue)
-    .pipe(map(missionModel =>{
+  startSearchMission(formValue:any, file:any): Observable<boolean>{
+    const formData = new FormData();  
+    formData.append("file", file, file.name); 
+    const url = `http://localhost:8888/services/search?longitude=${formValue.missionLatitudeEnd}&latitude=${formValue.missionLatitudeEnd}`;
+    return this.httpClient.post(url,formData)
+    .pipe(map(() => {return true}));
+  }
 
+  startSurveilMission(formValue:any): Observable<MissionModel>{
+    const url = `http://localhost:8888/services/surveil`;
+    return this.httpClient.post<MissionModel>(url, formValue)
+    .pipe(map(missionModel =>{
+      return missionModel;
+    })
+    );
+  }
+
+  startDeliveryMission(formValue:any): Observable<MissionModel>{
+    const url = `http://localhost:8888/services/delivery`;
+    return this.httpClient.post<MissionModel>(url, formValue)
+    .pipe(map(missionModel =>{
       return missionModel;
     })
     );

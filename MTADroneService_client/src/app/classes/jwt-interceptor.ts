@@ -14,11 +14,11 @@ export class JwtInterceptor implements HttpInterceptor {
 
         const currentUser: UserModel = this.authenticationService.currentUserValue;
 
-        if (currentUser && currentUser.authToken) {
+        if (currentUser && currentUser.jwtToken) {
 
             req = req.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${currentUser.authToken}`
+                    Authorization: `Bearer ${currentUser.jwtToken}`
                 }
             });
         }
