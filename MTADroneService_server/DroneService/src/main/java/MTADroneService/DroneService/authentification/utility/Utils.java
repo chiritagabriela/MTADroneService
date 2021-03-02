@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Utils {
 
-    public static String SERVER_IP = "35.242.255.174";
-    public static int PORT = 443;
+    public static String SERVER_IP = "127.0.0.1";
+    public static int PORT = 9999;
 
     public enum MissionTypes {
         SAR,
