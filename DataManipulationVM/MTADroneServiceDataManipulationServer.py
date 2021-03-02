@@ -137,12 +137,18 @@ def main():
 	while(1):
 		'''if(conn.recv(1024) == "landing"):
 			lander()'''
-		length_bytes = connBackend.recv(1024)
-		int_length = struct.unpack('<L',length_bytes)
-		if(int_length[0] > 0):
-			received_image = connBackend.recv(int_length[0])
-			print(received_image)
-			image = Image.open(io.BytesIO(received_image))
+		
+	byte_image_len = 0
+	byte_image = bytearray(1000000)
+	while(1):
+		'''if(conn.recv(1024) == "landing"):
+			lander()'''
+		received_image = connBackend.recv(8192)
+		if (received_image == b'stop'):
+			image = Image.open(io.BytesIO(byte_image))
 			image.save("find.png")
+			break
+		concatenateImageChunks(byte_image,received_image, byte_image_len)
+		byte_image_len = byte_image_len + len(received_image)
 
 main()
