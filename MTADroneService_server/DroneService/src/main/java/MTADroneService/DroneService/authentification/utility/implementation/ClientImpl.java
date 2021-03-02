@@ -31,8 +31,32 @@ public class ClientImpl implements Client {
     public void sendImageToServer(MultipartFile file) throws IOException {
         byte[] bytesImage = file.getBytes();
         int nrBytes = bytesImage.length;
-        byte[] bytesNrBytes = Ints.toByteArray(nrBytes);
-        out.write(bytesNrBytes);
-        out.write(bytesImage);
+        int currentLength = 0;
+        int difference = -1;
+
+        while (difference != 0) {
+            difference = nrBytes - currentLength;
+            if (difference < 8192 && difference != 0) {
+                currentLength = currentLength + difference;
+                out.write(getNextByteBlock(bytesImage,currentLength-difference,currentLength));
+            }
+            else{
+                if(difference != 0) {
+                    currentLength = currentLength + 8192;
+                    out.write(getNextByteBlock(bytesImage, currentLength - 8192, currentLength));
+                }
+            }
+        }
+        byte[] stop = ("s").getBytes();
+        out.write(stop);
+    }
+    private byte[] getNextByteBlock(byte[] totalBytes, int start, int end){
+        byte[] currentBlock = new byte[8192];
+        int iterator = 0;
+        for(int i=start;i<end;i++){
+            currentBlock[iterator] = totalBytes[i];
+            iterator++;
+        }
+        return currentBlock;
     }
 }
