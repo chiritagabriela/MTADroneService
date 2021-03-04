@@ -8,5 +8,5 @@ import java.io.IOException;
 public interface Client {
     void startConnection(String ip, int port) throws IOException;
     void stopConnection() throws IOException;
-    void sendImageToServer(MultipartFile file) throws IOException;
+    void receiveImageFromServer() throws IOException;
 }

@@ -38,7 +38,7 @@ public class ServiceServiceImpl implements ServiceService {
     public void createMission(MissionInfoDTO missionInfoDTO, MultipartFile file) throws IOException {
         Client client = new ClientImpl();
         client.startConnection(Utils.SERVER_IP,Utils.PORT);
-        client.sendImageToServer(file);
+        client.receiveImageFromServer();
         MissionModel missionModel = modelMapper.map(missionInfoDTO, MissionModel.class);
         missionModel.setMissionID(UUID.randomUUID().toString());
         missionModel.setMissionStatus(Utils.MissionStatus.PREPARING.toString());
