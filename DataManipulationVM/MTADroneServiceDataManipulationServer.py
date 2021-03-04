@@ -1,8 +1,4 @@
-import cv2
-import cv2.aruco as aruco
-import numpy as np
-import time
-import os
+
 import io
 import PIL.Image as Image
 import platform
@@ -44,7 +40,7 @@ def create_sockets():
 		global portBackend
 		global sockBackend
 		hostBackend = ""
-		portBackend = 443
+		portBackend = 9999
 		sockBackend = socket.socket()
 	except socket.error as msg:
 		print("[!]Socket for backend creation error: " + str(msg))
@@ -90,7 +86,7 @@ def sockets_accept():
 	connBackend, addressBackend = sockBackend.accept()
 	print("[+]Connection has been established for backend!")
 
-
+'''
 def lander():
 	global connDrone
 	frame = vcap.read()
@@ -125,30 +121,62 @@ def lander():
 			connDrone.send(bytesToSend)
 	except Exception as e:
 		print('[!]Target likely not found. Error: ' + str(e))
+'''
+
+def getNextByteBlock(totalBytes, start, end):
+	currentBlock = bytearray(8192)
+	iterator = 0
+	for i in range(start,end):
+		currentBlock[iterator] = totalBytes[i]
+		iterator = iterator + 1
+	return currentBlock
+
+def fillSpaces(nrBytes):
+	for i in range(len(nrBytes),4):
+		nrBytes = nrBytes + "!"
+	return nrBytes
+
+
+def sendImage(image):
+	global connBackend
+	with open(image, "rb") as image:
+		frame = image.read()
+		bytes_image = bytearray(frame)
+		nr_bytes = len(bytes_image)
+		connBackend.send(bytes(fillSpaces(str(nr_bytes)),"utf-8"))
+		current_length = 0
+		difference = -1
+		while difference != 0:
+			difference = nr_bytes - current_length
+			if difference < 8192 and difference != 0:
+				current_length = current_length + difference
+				connBackend.send(bytes(fillSpaces(str(difference)),"utf-8"))
+				connBackend.send(getNextByteBlock(bytes_image,current_length-difference,current_length))
+			else:
+				if difference != 0:
+					current_length = current_length + 8192
+					connBackend.send(bytes(str(8192), "utf-8"))
+					connBackend.send(getNextByteBlock(bytes_image,current_length-8192,current_length))
+
+
+
 def main():
 	global connDrone
 	global sockDrone
 	global connBackend
 	global sockBackend
+
 	create_sockets()
 	bind_socket_drone()
 	bind_socket_backend()
 	sockets_accept()
-	while(1):
-		'''if(conn.recv(1024) == "landing"):
+
+	sendImage("jjj.png")
+	'''byte_image_len = 0
+	byte_image = bytearray(1000000)'''
+	'''while(1):
+		if(conn.recv(1024) == "landing"):
 			lander()'''
-		
-	byte_image_len = 0
-	byte_image = bytearray(1000000)
-	while(1):
-		'''if(conn.recv(1024) == "landing"):
-			lander()'''
-		received_image = connBackend.recv(8192)
-		if (received_image == b'stop'):
-			image = Image.open(io.BytesIO(byte_image))
-			image.save("find.png")
-			break
-		concatenateImageChunks(byte_image,received_image, byte_image_len)
-		byte_image_len = byte_image_len + len(received_image)
+
 
 main()
