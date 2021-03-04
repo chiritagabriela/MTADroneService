@@ -16,7 +16,7 @@ export class ServicesComponent implements OnInit {
   searchForm!:FormGroup;
   surveillanceForm!:FormGroup;
   deliveryForm!:FormGroup;
-  searchFile!: File;
+
 
   constructor(private router:Router, private missionDroneService:DronemissionService,
     private formBuilder: FormBuilder) {
@@ -37,37 +37,22 @@ export class ServicesComponent implements OnInit {
 
     this.searchForm = this.formBuilder.group({
       missionLatitudeEnd:['',Validators.required],
-      missionLongitudeEnd:['',Validators.required],
-      fileField:['',Validators.required]
+      missionLongitudeEnd:['',Validators.required]
     });
   }
 
   onSubmitSearch(){
     this.submittedSearch = true;
-
-    if (this.searchForm.invalid) {
-      return;
-    }
-
-
-    if (this.searchFile != null || this.searchFile != undefined) {
-      this.missionDroneService.startSearchMission(this.searchForm.value, this.searchFile)
+      this.missionDroneService.startSearchMission(this.surveillanceForm.value)
       .subscribe(
         data => {
-          this.searchForm.reset();
           console.log("succes");
-          this.router.navigate(['/history']);
+         this.router.navigate(['/history']);
         },
         error =>{
           alert("Please reload the page.");
         }
       );
-    }
-
-  }
-
-  refreshChosenFile(files: FileList) {
-      this.searchFile = files[0];
   }
 
   onSubmitSurveillance(){
