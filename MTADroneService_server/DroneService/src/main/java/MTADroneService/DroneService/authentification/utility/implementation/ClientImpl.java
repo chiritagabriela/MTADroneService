@@ -21,6 +21,7 @@ public class ClientImpl implements Client {
     private InputStream in;
     private String droneID;
 
+
     @Override
     public void startConnection(String ip, int port, String droneID) throws IOException {
         clientSocket = new Socket(ip, port);
@@ -83,7 +84,6 @@ public class ClientImpl implements Client {
         }
         return nr;
     }
-
     private int findPadding(byte[] array) {
         int nr = 0;
         for (byte b : array) {
@@ -92,7 +92,6 @@ public class ClientImpl implements Client {
             }
         }
         return array.length-nr;
-    }
 
     @Override
     public String getDroneID(){
@@ -102,5 +101,6 @@ public class ClientImpl implements Client {
     @Override
     public void sendMessageToServer(String message) throws IOException {
         this.out.write(message.getBytes(StandardCharsets.UTF_8));
+
     }
 }

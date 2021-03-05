@@ -1,7 +1,6 @@
 package MTADroneService.DroneService.authentification.utility;
 
 import MTADroneService.DroneService.authentification.utility.implementation.ClientImpl;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -80,6 +79,7 @@ public class Utils {
             }
         }
         return null;
+
     }
 
     public static String serializeMessage(List<String> messages){

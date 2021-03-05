@@ -34,7 +34,6 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public void createMission(MissionInfoDTO missionInfoDTO) throws IOException {
-
         MissionModel missionModel = modelMapper.map(missionInfoDTO, MissionModel.class);
         missionModel.setMissionID(UUID.randomUUID().toString());
         missionModel.setMissionStatus(Utils.MissionStatus.PREPARING.toString());
