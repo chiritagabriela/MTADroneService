@@ -43,7 +43,7 @@ export class ServicesComponent implements OnInit {
 
   onSubmitSearch(){
     this.submittedSearch = true;
-      this.missionDroneService.startSearchMission(this.surveillanceForm.value)
+      this.missionDroneService.startSearchMission(this.searchForm.value)
       .subscribe(
         data => {
           console.log("succes");
@@ -71,7 +71,7 @@ export class ServicesComponent implements OnInit {
 
   onSubmitDelivery(){
     this.submittedDelivery = true;
-    this.missionDroneService.startDeliveryMission(this.surveillanceForm.value)
+    this.missionDroneService.startDeliveryMission(this.deliveryForm.value)
       .subscribe(
         data => {
           console.log("succes");

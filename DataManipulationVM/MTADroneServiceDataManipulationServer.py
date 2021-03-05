@@ -9,14 +9,8 @@ import math
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 print("Starting MTADRONESERVICE's server for data manipulation\n")
-'''
-vcap = cv2.VideoCapture('https://mtadroneservice.loca.lt/?action=stream')
-viewVideo=True
 
-if len(sys.argv)>1:
-	viewVideo=sys.argv[1]
-	if viewVideo=='0' or viewVideo=='False' or viewVideo=='false':
-		viewVideo=False
+
 
 id_to_find=72
 marker_size=18
@@ -33,7 +27,7 @@ cameraDistortion = np.loadtxt('/home/chirita_gabi/Communication-link-drones/came
 horizontal_fov = 62.2 * (math.pi / 180 )
 vertical_fov = 48.8 * (math.pi / 180)
 
-'''
+
 def create_sockets():
 	try:
 		global hostBackend
@@ -67,6 +61,7 @@ def bind_socket_backend():
 	except socket.error as msg:
 		print("[!]Socket backend binding error" + str(msg) + "\n" + "Retrying...")
 	print("[+]Socket backend binded.")
+
 def bind_socket_drone():
 	try:
 		global hostDrone
@@ -81,12 +76,12 @@ def bind_socket_drone():
 def sockets_accept():
 	global connDrone
 	global connBackend
-	'''connDrone, addressDrone = sockDrone.accept()
-	print("[+]Connection has been established for drone!")'''
+	connDrone, addressDrone = sockDrone.accept()
+	print("[+]Connection has been established for drone!")
 	connBackend, addressBackend = sockBackend.accept()
 	print("[+]Connection has been established for backend!")
 
-'''
+
 def lander():
 	global connDrone
 	frame = vcap.read()
@@ -121,7 +116,7 @@ def lander():
 			connDrone.send(bytesToSend)
 	except Exception as e:
 		print('[!]Target likely not found. Error: ' + str(e))
-'''
+
 
 def getNextByteBlock(totalBytes, start, end):
 	currentBlock = bytearray(8192)
@@ -157,8 +152,14 @@ def sendImage(image):
 					current_length = current_length + 8192
 					connBackend.send(bytes(str(8192), "utf-8"))
 					connBackend.send(getNextByteBlock(bytes_image,current_length-8192,current_length))
+def discardBytes(message):
+	new_string = ""
+	for i in range(2,len(message)-1):
+		new_string = new_string + message[i]
+	return new_string
 
-
+def deserializeMessage(message):
+	return message.split("!")
 
 def main():
 	global connDrone
@@ -171,12 +172,27 @@ def main():
 	bind_socket_backend()
 	sockets_accept()
 
-	sendImage("jjj.png")
-	'''byte_image_len = 0
-	byte_image = bytearray(1000000)'''
-	'''while(1):
-		if(conn.recv(1024) == "landing"):
-			lander()'''
+	while(1):
+		backend_message = connBackend.recv(1024)
+		string_backend_message = discardBytes(str(backend_message))
+		list = deserializeMessage(string_backend_message)
+		if(list[0] == "search"):
+			coordinates = "[" + list[1] + "][" + list[2] + "]"
+			connDrone.send(coordinates)
+			if(connDrone.recv(1024) == "point_reached"):
+				vcap = cv2.VideoCapture('https://mtadroneservice.loca.lt/?action=stream')
+				while(connDrone.recv(1024) != "returning_to_base"):
+					#aici functie de gasire oameni
+			if(connDrone.recv(1024) == "landing"):
+				lander()
+		if (list[0] == "surveil"):
+			coordinates = "[" + list[1] + "][" + list[2] + "]"
+			connDrone.send(coordinates)
+		if(list[0] == "delivery"):
+			coordinates = "[" + list[1] + "][" + list[2] + "][" + list[3] + "][" + list[4] + "]"
+			connDrone.send(coordinates)
+
+
 
 
 main()

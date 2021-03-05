@@ -23,7 +23,7 @@ public class ServiceController {
 
     @PostMapping(value = "/search")
     @PreAuthorize("hasAnyRole('USER')")
-    public MissionInfoDTO createSearchMission(MissionInfoDTO missionInfoDTO) throws IOException {
+    public MissionInfoDTO createSearchMission(@RequestBody MissionInfoDTO missionInfoDTO) throws IOException {
         checkNotNull(missionInfoDTO);
         missionInfoDTO.setMissionDate(Utils.getCurrentDate());
         missionInfoDTO.setMissionType(Utils.MissionTypes.SAR.toString());
