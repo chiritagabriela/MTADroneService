@@ -11,18 +11,23 @@ import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class ClientImpl implements Client {
+
     private Socket clientSocket;
     private OutputStream out;
     private InputStream in;
+    private String droneID;
+
 
     @Override
-    public void startConnection(String ip, int port) throws IOException {
+    public void startConnection(String ip, int port, String droneID) throws IOException {
         clientSocket = new Socket(ip, port);
         out = clientSocket.getOutputStream();
         in = clientSocket.getInputStream();
+        this.droneID = droneID;
     }
 
     @Override
@@ -53,6 +58,7 @@ public class ClientImpl implements Client {
         }
         Utils.saveImage(byteImage);
     }
+
     private byte[] getNextByteBlock(byte[] totalBytes, int start, int end){
         byte[] currentBlock = new byte[8192];
         int iterator = 0;
@@ -62,6 +68,7 @@ public class ClientImpl implements Client {
         }
         return currentBlock;
     }
+
     private void concatenateImageChunks(byte[] imageArray, byte[] receivedImage, int byteImgLen) {
         int cnt = 0;
         for (int i=byteImgLen; i<byteImgLen + receivedImage.length;i++){
@@ -85,5 +92,15 @@ public class ClientImpl implements Client {
             }
         }
         return array.length-nr;
+
+    @Override
+    public String getDroneID(){
+        return this.droneID;
+    }
+
+    @Override
+    public void sendMessageToServer(String message) throws IOException {
+        this.out.write(message.getBytes(StandardCharsets.UTF_8));
+
     }
 }

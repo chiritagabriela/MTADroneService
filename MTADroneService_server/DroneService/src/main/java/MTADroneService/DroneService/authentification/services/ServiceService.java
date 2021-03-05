@@ -6,5 +6,5 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 public interface ServiceService {
-    void createMission(MissionInfoDTO missionInfoDTO, MultipartFile file) throws IOException;
+    void createMission(MissionInfoDTO missionInfoDTO) throws IOException;
 }

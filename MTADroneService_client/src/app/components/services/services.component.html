@@ -81,12 +81,8 @@
                                 <div *ngIf="fSearch.missionLatitudeEnd.errors.required">Latitude is required!</div>
                             </div>
                         </div>
-                        <input 
-                        formControlName="fileField"
-                        class="form-control"
-                        style="position: relative;top:10px;" (change)="refreshChosenFile($event.target.files)" type="file" id="myFile" name="filename">
-                        <p style="position: relative;top:25px;">Introduce photo of missing person.</p>
-                        <button style="background-color: #157FBE;top:60px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
+                        <p>Point is the center of a 3 meters square.</p>
+                        <button style="background-color: #157FBE;top:75px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
                     </div>
                 </form>
             </div>

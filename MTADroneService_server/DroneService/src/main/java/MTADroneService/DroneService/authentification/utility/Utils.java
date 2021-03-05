@@ -1,5 +1,6 @@
 package MTADroneService.DroneService.authentification.utility;
 
+import MTADroneService.DroneService.authentification.utility.implementation.ClientImpl;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -12,13 +13,17 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Utils {
 
     public static String SERVER_IP = "127.0.0.1";
     public static int PORT = 9999;
     public static int imageNumber = 0;
+    public static List<Client> clients = new ArrayList<>();
+    public static int nrClients = 0;
 
     public enum MissionTypes {
         SAR,
@@ -66,4 +71,24 @@ public class Utils {
         ImageIO.write(rendered, "JPG", new File(imageNumber+".jpg"));
         imageNumber = imageNumber + 1;
     }
+
+    public static Client getClientConnection(String droneID){
+        for (Client client : Utils.clients) {
+            if (client.getDroneID().equals(droneID)) {
+                return client;
+            }
+        }
+        return null;
+
+    }
+
+    public static String serializeMessage(List<String> messages){
+        String messageToSend = "!";
+        for (String message : messages) {
+            messageToSend = messageToSend + message + "!";
+        }
+        return messageToSend;
+    }
+
+
 }

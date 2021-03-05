@@ -23,25 +23,21 @@ public class ServiceController {
 
     @PostMapping(value = "/search")
     @PreAuthorize("hasAnyRole('USER')")
-    public MissionInfoDTO createSearchMission(@RequestParam String longitude,
-                                              @RequestParam String latitude,
-                                              @RequestBody MultipartFile file) throws IOException {
-
-        MissionInfoDTO missionInfoDTO = new MissionInfoDTO();
-        missionInfoDTO.setMissionLatitudeEnd(latitude);
-        missionInfoDTO.setMissionLongitudeEnd(longitude);
+    public MissionInfoDTO createSearchMission(MissionInfoDTO missionInfoDTO) throws IOException {
+        checkNotNull(missionInfoDTO);
         missionInfoDTO.setMissionDate(Utils.getCurrentDate());
         missionInfoDTO.setMissionType(Utils.MissionTypes.SAR.toString());
-        serviceService.createMission(missionInfoDTO, file);
+        serviceService.createMission(missionInfoDTO);
         return missionInfoDTO;
     }
+
     @PostMapping(value = "/surveil")
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createSurveilMission(@RequestBody MissionInfoDTO missionInfoDTO) throws IOException {
         checkNotNull(missionInfoDTO);
         missionInfoDTO.setMissionDate(Utils.getCurrentDate());
         missionInfoDTO.setMissionType(Utils.MissionTypes.SURVEILLANCE.toString());
-        serviceService.createMission(missionInfoDTO, null);
+        serviceService.createMission(missionInfoDTO);
         return missionInfoDTO;
     }
 
@@ -51,7 +47,7 @@ public class ServiceController {
         checkNotNull(missionInfoDTO);
         missionInfoDTO.setMissionDate(Utils.getCurrentDate());
         missionInfoDTO.setMissionType(Utils.MissionTypes.DELIVERY.toString());
-        serviceService.createMission(missionInfoDTO, null);
+        serviceService.createMission(missionInfoDTO);
         return missionInfoDTO;
     }
 }

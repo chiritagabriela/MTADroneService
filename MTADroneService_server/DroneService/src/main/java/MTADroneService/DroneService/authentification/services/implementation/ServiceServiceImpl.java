@@ -17,10 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ServiceServiceImpl implements ServiceService {
@@ -35,19 +33,26 @@ public class ServiceServiceImpl implements ServiceService {
     DroneDAO droneDAO;
 
     @Override
-    public void createMission(MissionInfoDTO missionInfoDTO, MultipartFile file) throws IOException {
-        Client client = new ClientImpl();
-        client.startConnection(Utils.SERVER_IP,Utils.PORT);
-        client.receiveImageFromServer();
+    public void createMission(MissionInfoDTO missionInfoDTO) throws IOException {
         MissionModel missionModel = modelMapper.map(missionInfoDTO, MissionModel.class);
         missionModel.setMissionID(UUID.randomUUID().toString());
         missionModel.setMissionStatus(Utils.MissionStatus.PREPARING.toString());
         List<DroneModel> droneModelList = droneDAO.findByDroneStatus("AVAILABLE");
-        DroneModel newDrone = droneModelList.get(0);
-        newDrone.setDroneStatus(Utils.DroneStatus.BUSY.toString());
-        droneDAO.save(newDrone);
-        droneDAO.deleteByDroneIDAndDroneStatus(droneModelList.get(0).getDroneID(),Utils.DroneStatus.AVAILABLE.toString());
-        missionModel.setMissionDroneID(newDrone.getDroneID());
-        missionDAO.save(missionModel);
+
+        if(droneModelList.size() != 0) {
+            DroneModel newDrone = droneModelList.get(0);
+            newDrone.setDroneStatus(Utils.DroneStatus.BUSY.toString());
+            droneDAO.save(newDrone);
+            droneDAO.deleteByDroneIDAndDroneStatus(droneModelList.get(0).getDroneID(), Utils.DroneStatus.AVAILABLE.toString());
+            missionModel.setMissionDroneID(newDrone.getDroneID());
+            missionDAO.save(missionModel);
+            Client client = new ClientImpl();
+            client.startConnection(Utils.SERVER_IP,Utils.PORT,droneModelList.get(0).getDroneID());
+            List<String> list = new ArrayList<>();
+            list.add("startSearch");
+            list.add(missionInfoDTO.getMissionLongitudeEnd());
+            list.add(missionInfoDTO.getMissionLatitudeEnd());
+            client.sendMessageToServer(Utils.serializeMessage(list));
+        }
     }
 }
