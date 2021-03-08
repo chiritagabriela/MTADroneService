@@ -25,6 +25,9 @@ public class ServiceController {
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createSearchMission(@RequestBody MissionInfoDTO missionInfoDTO) throws IOException {
         checkNotNull(missionInfoDTO);
+        Utils.latitudeEnd = missionInfoDTO.getMissionLatitudeEnd();
+        Utils.longitudeEnd = missionInfoDTO.getMissionLongitudeEnd();
+        Utils.missionType = "search";
         missionInfoDTO.setMissionDate(Utils.getCurrentDate());
         missionInfoDTO.setMissionType(Utils.MissionTypes.SAR.toString());
         serviceService.createMission(missionInfoDTO);
@@ -35,6 +38,9 @@ public class ServiceController {
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createSurveilMission(@RequestBody MissionInfoDTO missionInfoDTO) throws IOException {
         checkNotNull(missionInfoDTO);
+        Utils.latitudeEnd = missionInfoDTO.getMissionLatitudeEnd();
+        Utils.longitudeEnd = missionInfoDTO.getMissionLongitudeEnd();
+        Utils.missionType = "surveil";
         missionInfoDTO.setMissionDate(Utils.getCurrentDate());
         missionInfoDTO.setMissionType(Utils.MissionTypes.SURVEILLANCE.toString());
         serviceService.createMission(missionInfoDTO);
@@ -45,6 +51,11 @@ public class ServiceController {
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createDeliveryMission(@RequestBody MissionInfoDTO missionInfoDTO) throws IOException {
         checkNotNull(missionInfoDTO);
+        Utils.latitudeEnd = missionInfoDTO.getMissionLatitudeEnd();
+        Utils.longitudeEnd = missionInfoDTO.getMissionLongitudeEnd();
+        Utils.latitudeStart = missionInfoDTO.getMissionLatitudeStart();
+        Utils.longitudeStart = missionInfoDTO.getMissionLongitudeStart();
+        Utils.missionType = "delivery";
         missionInfoDTO.setMissionDate(Utils.getCurrentDate());
         missionInfoDTO.setMissionType(Utils.MissionTypes.DELIVERY.toString());
         serviceService.createMission(missionInfoDTO);

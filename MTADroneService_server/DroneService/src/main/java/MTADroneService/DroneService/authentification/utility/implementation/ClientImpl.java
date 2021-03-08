@@ -55,7 +55,7 @@ public class ClientImpl implements Client {
                 getOut = 1;
             }
         }
-        Utils.saveImage(byteImage);
+        //Utils.saveImage(byteImage);
     }
 
     private byte[] getNextByteBlock(byte[] totalBytes, int start, int end){

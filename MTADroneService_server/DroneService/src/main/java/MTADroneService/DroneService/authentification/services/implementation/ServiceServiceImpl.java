@@ -7,6 +7,7 @@ import MTADroneService.DroneService.authentification.models.DroneModel;
 import MTADroneService.DroneService.authentification.models.MissionModel;
 import MTADroneService.DroneService.authentification.services.ServiceService;
 import MTADroneService.DroneService.authentification.utility.Client;
+import MTADroneService.DroneService.authentification.utility.SSHConnection;
 import MTADroneService.DroneService.authentification.utility.Utils;
 import MTADroneService.DroneService.authentification.utility.implementation.ClientImpl;
 import org.modelmapper.ModelMapper;
@@ -47,13 +48,8 @@ public class ServiceServiceImpl implements ServiceService {
             droneDAO.deleteByDroneIDAndDroneStatus(droneModelList.get(0).getDroneID(), Utils.DroneStatus.AVAILABLE.toString());
             missionModel.setMissionDroneID(newDrone.getDroneID());
             missionDAO.save(missionModel);
-            Client client = new ClientImpl();
-            client.startConnection(Utils.SERVER_IP,Utils.PORT,droneModelList.get(0).getDroneID());
-            List<String> list = new ArrayList<>();
-            list.add("startSearch");
-            list.add(missionInfoDTO.getMissionLongitudeEnd());
-            list.add(missionInfoDTO.getMissionLatitudeEnd());
-            client.sendMessageToServer(Utils.serializeMessage(list));
+            SSHConnection sshConnection = new SSHConnection("172.20.10.4","pi","raspberry");
+            //sshConnection.sendCommandToDrone("sudo python ");
         }
     }
 }

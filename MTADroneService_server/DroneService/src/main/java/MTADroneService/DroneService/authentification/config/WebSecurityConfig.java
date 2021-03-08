@@ -42,7 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 new AntPathRequestMatcher("/user/**"),
                 new AntPathRequestMatcher("/token/**"),
                 new AntPathRequestMatcher("/services/**"),
-                new AntPathRequestMatcher("/missions/**")
+                new AntPathRequestMatcher("/missions/**"),
+                new AntPathRequestMatcher("/communication/**")
         );
 
         AuthFilter authFilter = new AuthFilter(orRequestMatcher);
