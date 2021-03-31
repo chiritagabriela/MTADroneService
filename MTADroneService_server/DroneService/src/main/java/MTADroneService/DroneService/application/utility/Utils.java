@@ -31,6 +31,7 @@ public class Utils {
     public static String longitudeEnd = "";
     public static String latitudeStart = "";
     public static String longitudeStart = "";
+    public static String[] labels = {"person"};
 
     public enum MissionTypes {
         SAR,

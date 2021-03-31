@@ -26,7 +26,6 @@ public class CommunicationController {
         jsonObject.put("longitudeStart","");
         jsonObject.put("latitudeEnd",Utils.latitudeEnd);
         jsonObject.put("longitudeEnd",Utils.longitudeEnd);
-        jsonObject.put("gabi","124");
         return jsonObject;
     }
 }

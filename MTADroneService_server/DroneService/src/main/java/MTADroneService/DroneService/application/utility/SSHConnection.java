@@ -41,6 +41,7 @@ public class SSHConnection {
                 while(in.available()>0){
                     int i=in.read(tmp, 0, 1024);
                     if(i<0)break;
+                    System.out.print(new String(tmp, 0, i));
                 }
                 if(channel.isClosed()){
                     break;

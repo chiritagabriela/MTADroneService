@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MarkdownModule } from 'ngx-markdown';
@@ -18,6 +16,7 @@ import { JwtInterceptor } from 'src/app/classes/jwt-interceptor';
 import { AboutComponent } from './components/about/about.component';
 import { MissionsComponent } from './components/missions/missions.component';
 import { ContactComponent } from './components/contact/contact.component'
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -31,13 +30,18 @@ import { ContactComponent } from './components/contact/contact.component'
     AboutComponent,
     MissionsComponent,
     ContactComponent,
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MarkdownModule.forRoot(),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBTUZQAHPsGITuBpKljuP3pN8Qgk6E_lXg',
+      libraries: ['places']
+    })
   ],
   providers: [CookieService,{provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}],
   bootstrap: [AppComponent]

@@ -15,12 +15,14 @@ html, body {
 .card {
   width: 450px;
   height: 250px;
+  top: 70px;
+  left: -40px;
   background-color: #fff;
   background: linear-gradient(#f8f8f8, #fff);
   box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
   border-radius: 6px;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   margin: 1.5rem;
 }
 
@@ -177,3 +179,73 @@ html, body {
 }
 
 
+.container {
+  position: relative;
+  width: 100%;
+  top: 650px;
+  height: 500px;
+  left: auto;
+  background-color: none;
+  margin-top: 30px;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.1), 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+  text-align: left;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+
+.box {
+  position: relative;
+  padding: 20px 50px 0px 30px;
+  color: rgb(116, 124, 142);
+  font-size: 15px;
+  overflow: auto;
+  width: auto;
+  height: auto;
+}
+
+.link-item {
+  position: relative;
+  top: 15px;
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  font-size: 12px;
+  color: rgb(87, 135, 253);
+  text-align: right;
+  padding-right: 40px;
+  text-decoration: none;
+}
+
+agm-map{
+  position: relative;
+  left: 500px;
+  top: 20px;
+  width: 600px;
+  height: 400px;
+}
+
+#images{
+  position: relative;
+  width: 600px;
+  height: 390px;
+  top: -95%;
+  list-style: none;
+  left: 300%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+#images.link-item{
+  position:relative;
+  width:30px;
+  height:30px;
+}
+.text{
+  position: relative;
+  top:650px;
+  left: 530px;
+  width: 225px;
+  height: 80px;
+  font-size: 30px;   
+}

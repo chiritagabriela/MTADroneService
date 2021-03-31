@@ -1,47 +1,105 @@
-<div style="top:800px;position: relative;width: 600px;height: 700px;" class="center">
-    <h1 style="position: relative;top: 200px;left: 27%;">Current mission</h1>
-    <div style="position: relative;top: 200px;left: 27%;" class="group"> 
-        <label for="pass" class="label">Mission status</label> 
-        <input id="pass" type="text" class="input" data-type="text"> 
-    </div>   
-    <div class="card" style="top: 250px; left: -45%;">
-        <div class="additional">
-            <div class="user-card">
-            <div class="level center">
-                Mission 
-            </div>
-            <div class="points center">
-                Mission number
-            </div>
-            </div>
-            <div class="more-info">
-            <h1>Type of mission</h1>
-            <div class="coords">
-                <span>Date</span>
-            </div>
-            <div class="coords">
-                <span>Longitude</span>
-                <span>Latitude</span>
-            </div>
-            <div class="stats">
-                <div>
-                <div class="title">Successful</div>
-                <i class="fa fa-trophy"></i>
-                <div class="value">yes</div>
+<div class="text">Current missions</div>
+<div class="container">
+    <div class="box">
+      <ul style="list-style-type: none; width: 400px; height: 400px;position: relative;">
+        <li style="width: 400px; height: 400px; position:relative"> 
+            <agm-map id="map" [latitude]='lat' [longitude]='long'>
+                <agm-marker 
+                *ngFor="let marker of markers" 
+                [latitude]="marker.lat" 
+                  [longitude]="marker.lng">    
+                      <agm-info-window #infoWindow>
+                          {{ marker.label }}
+                    </agm-info-window>
+            </agm-marker>
+            </agm-map>
+            <div class="card">
+                <div class="additional">
+                    <div class="user-card">
+                    <div class="level center">
+                        Mission 
+                    </div>
+                    <div class="points center">
+                        Mission number
+                    </div>
+                    </div>
+                    <div class="more-info">
+                    <h1>Type of mission</h1>
+                    <div class="coords">
+                        <span>Date</span>
+                    </div>
+                    <div class="coords">
+                        <span>Longitude</span>
+                        <span>Latitude</span>
+                    </div>
+                    <div class="stats">
+                        <div>
+                        <div class="title">Successful</div>
+                        <i class="fa fa-trophy"></i>
+                        <div class="value">yes</div>
+                        </div>
+                        <div>
+                        <div class="title">Time</div>
+                        <i class="fa fa-gamepad"></i>
+                        <div class="value">27</div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-                <div>
-                <div class="title">Time</div>
-                <i class="fa fa-gamepad"></i>
-                <div class="value">27</div>
+                <div class="general">
+                    <h1>Mission status</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
+                    <span class="more">Mouse over the card for more info</span>
                 </div>
-            </div>
-            </div>
-        </div>
-        <div class="general">
-            <h1>Type of mission</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
-            <span class="more">Mouse over the card for more info</span>
-        </div>
-    </div> 
-    <h1 style="position: relative;top: 300px;left: 39%;">History</h1>
-</div>
+            </div> 
+            <ul id="images">
+                <li><img src="./assets/images/lidar.jpg"></li>
+                <li><img src="./assets/images/lidar.jpg"></li>
+                <li><img src="./assets/images/lidar.jpg"></li>
+            </ul>
+        </li> 
+        <li style="width: 400px; height: 400px; position:relative">
+            <agm-map [latitude]='lat' [longitude]='long'></agm-map>
+            <div class="card">
+                <div class="additional">
+                    <div class="user-card">
+                    <div class="level center">
+                        Mission 
+                    </div>
+                    <div class="points center">
+                        Mission number
+                    </div>
+                    </div>
+                    <div class="more-info">
+                    <h1>Type of mission</h1>
+                    <div class="coords">
+                        <span>Date</span>
+                    </div>
+                    <div class="coords">
+                        <span>Longitude</span>
+                        <span>Latitude</span>
+                    </div>
+                    <div class="stats">
+                        <div>
+                        <div class="title">Successful</div>
+                        <i class="fa fa-trophy"></i>
+                        <div class="value">yes</div>
+                        </div>
+                        <div>
+                        <div class="title">Time</div>
+                        <i class="fa fa-gamepad"></i>
+                        <div class="value">27</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="general">
+                    <h1>Mission status</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
+                    <span class="more">Mouse over the card for more info</span>
+                </div>
+            </div> 
+        </li> 
+      </ul>
+    </div>
+  </div> 

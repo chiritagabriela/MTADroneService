@@ -49,7 +49,7 @@ public class ServiceServiceImpl implements ServiceService {
             missionModel.setMissionDroneID(newDrone.getDroneID());
             missionDAO.save(missionModel);
             SSHConnection sshConnection = new SSHConnection("172.20.10.4","pi","raspberry");
-            //sshConnection.sendCommandToDrone("sudo python ");
+            sshConnection.sendCommandToDrone("sudo python /home/pi/MTADroneService/drone_controller/drone_client.py");
         }
     }
 }
