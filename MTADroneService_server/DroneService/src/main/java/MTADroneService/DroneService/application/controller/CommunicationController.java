@@ -10,17 +10,14 @@ import MTADroneService.DroneService.application.utility.MissionInfoToSend;
 import MTADroneService.DroneService.application.utility.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 @RestController
 @RequestMapping("/communication")
@@ -135,7 +132,7 @@ public class CommunicationController {
     @RequestMapping(value = "/get_image/{imageName}", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> getImage(@PathVariable String imageName) throws IOException, URISyntaxException {
         Map<String, String> jsonMap = new HashMap<>();
-        String windowsPath = "C:\\Users\\gabri\\Desktop\\Licenta\\MTADroneService\\MTADroneService\\MTADroneService_server\\DroneService\\";
+        String windowsPath = "C:\\Users\\gabri\\Desktop\\Licenta\\MTADroneService\\MTADroneService\\MTADroneService_server\\DroneService\\images\\";
         try {
             File file = new File(windowsPath + imageName);
             if (file != null) {

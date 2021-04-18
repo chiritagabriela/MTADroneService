@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MissionModel } from 'src/app/models/mission-model';
 import { DronemissionService } from 'src/app/services/dronemission.service';
 import { DomSanitizer} from '@angular/platform-browser'; 
+import { saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-missions',
@@ -45,12 +46,18 @@ export class MissionsComponent implements OnInit {
   
   updateDronePosition(){
     this.dronemissionService.getCurrentPosition(this.missionModel.missionDroneInfo.droneID).subscribe(
-      
       data => {
         if(data.currentDroneCoordinates.missionStatus == "FINISHED"){
+          for(let imageName in this.serverDroneImages) {
+            let image = this.imageObject.filter(x => x.title === imageName)
+            let img = image[0];
+            let im2 = img.image;
+            saveAs(img.image.toString(), imageName);
+          }
           this.imageObject = [];
           this.feDroneImages = [];
           clearInterval(this.pollingInterval);
+          this.router.navigate(['/history']);
         }
 
         this.markers[0].currentLatitude = parseInt(data.currentDroneCoordinates.currentLatitude);

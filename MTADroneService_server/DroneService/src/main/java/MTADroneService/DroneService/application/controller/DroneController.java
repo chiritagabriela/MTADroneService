@@ -1,22 +1,17 @@
 package MTADroneService.DroneService.application.controller;
 
 import MTADroneService.DroneService.application.daos.DroneDAO;
-import MTADroneService.DroneService.application.daos.UserDAO;
 import MTADroneService.DroneService.application.dtos.DroneInfoDTO;
 import MTADroneService.DroneService.application.models.DroneModel;
-import MTADroneService.DroneService.application.models.UserModel;
 import MTADroneService.DroneService.application.services.DroneService;
-import MTADroneService.DroneService.application.utility.DroneCoordinates;
 import MTADroneService.DroneService.application.utility.Utils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,13 +40,14 @@ public class DroneController {
             droneInfoDTO.setCurrentDroneCoordinates(Utils.getDronePosition(droneID));
             if(droneInfoDTO.getCurrentDroneCoordinates() != null) {
                 if (droneInfoDTO.getCurrentDroneCoordinates().getMissionStatus().equals(Utils.MissionStatus.FINISHED.toString())) {
-                    Utils.missionDetails.clear();
-                    Utils.currentPosition.clear();
-                    Utils.imageNumber.set(0);
                     List<DroneModel> droneModelList = droneDAO.findByDroneStatus("BUSY");
                     if (droneModelList.size() != 0) {
                         DroneModel newDrone = droneModelList.get(0);
                         newDrone.setDroneStatus(Utils.DroneStatus.AVAILABLE.toString());
+                        Utils.deleteAllCurrentPhotos(droneID);
+                        Utils.missionDetails.clear();
+                        Utils.currentPosition.clear();
+                        Utils.imageNumber.set(0);
                         droneDAO.save(newDrone);
                         droneDAO.deleteByDroneIDAndDroneStatus(droneModelList.get(0).getDroneID(), Utils.DroneStatus.BUSY.toString());
                     }

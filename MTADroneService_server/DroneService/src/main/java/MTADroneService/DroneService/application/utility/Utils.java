@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -118,6 +121,27 @@ public class Utils {
             return null;
         } else {
             return new File(resource.toURI());
+        }
+    }
+
+    public static void deletePhoto(String pictureName){
+        Path imagesPath = Paths.get("C:\\Users\\gabri\\Desktop\\Licenta\\MTADroneService\\MTADroneService\\MTADroneService_server\\DroneService\\images\\" + pictureName);
+        try {
+            Files.delete(imagesPath);
+            System.out.println("File "
+                    + imagesPath.toAbsolutePath().toString()
+                    + " successfully removed!");
+        } catch (IOException e) {
+            System.err.println("Unable to delete "
+                    + imagesPath.toAbsolutePath().toString()
+                    + " due to...");
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteAllCurrentPhotos(String droneID){
+        for(int i=0;i<Utils.getDronePosition(droneID).getImages().size();i++){
+            deletePhoto(Utils.getDronePosition(droneID).getImages().get(i) + ".png");
         }
     }
 }

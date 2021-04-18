@@ -10,6 +10,7 @@ count = 0
 
 print("[+]Waiting to receive video..")
 while(1):
+        time.sleep(3)
         response = requests.get('http://172.20.10.2:8888/communication/get_video_url')
         video_url_incomplete = response.json()['videoURL']
         drone_id = response.json()['droneID']
@@ -17,6 +18,7 @@ while(1):
                 break
 
 print("[+]Video received.")
+time.sleep(5)
 video_url = "https://" + video_url_incomplete + "/?action=stream"
 video = cv2.VideoCapture(video_url)
 ap = argparse.ArgumentParser()
@@ -38,16 +40,13 @@ configPath = os.path.sep.join([args["yolo"], "yolov3_testing.cfg"])
 print("[+]Loading YOLO from disk...")
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 
-def mission_still_running(ID):
-    response = requests.get('http://172.20.10.2:8888/communication/get_mission_status/' + ID)
+def mission_still_running(drone_id):
+    response = requests.get('http://172.20.10.2:8888/communication/get_mission_status/' + drone_id)
     status = response.json()['missionStatus']
-    print(status)
-    if(status == "SEARCHING_PERSON"):
-        return True
-    return False
+    return status
 
 while video.isOpened():
-    if(mission_still_running(drone_id)):
+    if(mission_still_running(drone_id) == "SEARCHING_PERSON"):
         ret, image = video.read()
         count = count + 1
         if(count % 15 == 0):
@@ -102,6 +101,5 @@ while video.isOpened():
                     headers = {}
                     response = requests.post(url, files=files, headers=headers)
 
-
-
-
+    if (mission_still_running(drone_id) == "FLYING_TO_BASE"):
+        break
