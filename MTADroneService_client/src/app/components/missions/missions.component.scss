@@ -241,11 +241,20 @@ agm-map{
   width:30px;
   height:30px;
 }
+
 .text{
   position: relative;
   top:650px;
-  left: 530px;
+  left: 42%;
   width: 225px;
   height: 80px;
   font-size: 30px;   
+}
+
+ng-image-slider{
+  position: relative;
+  left:300%;
+  top:-70%;
+  width: 100px;
+  height: 100px;
 }

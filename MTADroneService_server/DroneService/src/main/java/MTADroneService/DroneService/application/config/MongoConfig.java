@@ -1,8 +1,7 @@
-package MTADroneService.DroneService.authentification.config;
+package MTADroneService.DroneService.application.config;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.FieldProxy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

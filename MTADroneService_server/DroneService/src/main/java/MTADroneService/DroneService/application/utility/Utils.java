@@ -1,37 +1,22 @@
-package MTADroneService.DroneService.authentification.utility;
-
-import MTADroneService.DroneService.authentification.utility.implementation.ClientImpl;
+package MTADroneService.DroneService.application.utility;
+import lombok.SneakyThrows;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Utils {
-
-    //public static String SERVER_IP = "35.242.255.174";
-    //public static int PORT = 443;
-    //public static int imageNumber = 0;
-    //public static List<Client> clients = new ArrayList<>();
-    //public static int nrClients = 0;
-
-    public static String missionType = "";
-    public static String latitudeEnd = "";
-    public static String longitudeEnd = "";
-    public static String latitudeStart = "";
-    public static String longitudeStart = "";
-    public static String[] labels = {"person"};
 
     public enum MissionTypes {
         SAR,
@@ -44,59 +29,95 @@ public class Utils {
         FLYING_TO_INTEREST_POINT,
         SEARCHING_PERSON,
         FLYING_TO_BASE,
-        SURVEIL_TERRAIN,
-        COMING_BACK,
-        LANDING
+        LANDING,
+        FINISHED
     }
 
     public enum DroneStatus{
         AVAILABLE,
         BUSY
     }
+
+    public static AtomicInteger imageNumber = new AtomicInteger(0);
+    public static final Map<String, DroneCoordinates> currentPosition = new ConcurrentHashMap<>();
+    public static final Map<String, MissionInfoToSend> missionDetails = new ConcurrentHashMap<>();
+
+    public static void updateDronePosition(String droneID, DroneCoordinates droneCoordinates) {
+        if(droneCoordinates != null) {
+            currentPosition.get(droneID).setCurrentLongitude(droneCoordinates.currentLongitude);
+            currentPosition.get(droneID).setCurrentLatitude(droneCoordinates.currentLatitude);
+        }
+    }
+
+    public static void addMissionInfoToSend(String droneID, MissionInfoToSend missionInfoToSend){
+        missionDetails.put(droneID,missionInfoToSend);
+    }
+
+    public static synchronized void addNewImage(String droneID, String imageName){
+        currentPosition.get(droneID).getImages().add(imageName);
+    }
+
+    public static void updateMissionStatus(String droneID, String newMissionStatus){
+        if(Utils.currentPosition.size() != 0) {
+            Utils.currentPosition.get(droneID).setMissionStatus(newMissionStatus);
+        }
+    }
+
+    public static DroneCoordinates getDronePosition(String droneID) {
+        return currentPosition.get(droneID);
+    }
+
+    public static MissionInfoToSend getMissionInfoToSend(String droneID){ return missionDetails.get(droneID); }
+
+    public static void removeMissionInfoToSend(String droneID){Utils.missionDetails.remove(droneID);}
+
     public static Date getCurrentDate(){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return new Date(System.currentTimeMillis());
     }
 
-    /*
-    public static void saveImage(byte[] byteImage) throws IOException {
-        ImageIcon imageIcon = new ImageIcon(byteImage);
-        Image image = imageIcon.getImage();
-        RenderedImage rendered = null;
-        if (image instanceof RenderedImage) {
-            rendered = (RenderedImage)image;
-        }
-        else {
-            BufferedImage buffered = new BufferedImage(
-                    imageIcon.getIconWidth(),
-                    imageIcon.getIconHeight(),
-                    BufferedImage.TYPE_INT_RGB
-            );
-            Graphics2D g = buffered.createGraphics();
-            g.drawImage(image, 0, 0, null);
-            g.dispose();
-            rendered = buffered;
-        }
-        ImageIO.write(rendered, "JPG", new File(imageNumber+".jpg"));
-        imageNumber = imageNumber + 1;
-    }
+    public static void saveImage(byte[] byteImage, String imageName, DroneCoordinates droneCoordinates) {
+        Thread th1 = new Thread(new Runnable() {
+            @SneakyThrows
+            public void run() {
+                ImageIcon imageIcon = new ImageIcon(byteImage);
+                Image image = imageIcon.getImage();
+                RenderedImage rendered = null;
+                if (image instanceof RenderedImage) {
+                    rendered = (RenderedImage) image;
+                } else {
+                    BufferedImage buffered = new BufferedImage(
+                            imageIcon.getIconWidth(),
+                            imageIcon.getIconHeight(),
+                            BufferedImage.TYPE_INT_RGB
+                    );
+                    Graphics2D g = buffered.createGraphics();
+                    g.drawImage(image, 0, 0, null);
+                    g.setFont(g.getFont().deriveFont(20f));
+                    String stringToWrite = "Lat:" + droneCoordinates.getCurrentLatitude() + "-Lon:" + droneCoordinates.getCurrentLongitude();
+                    g.drawString(stringToWrite, 50, 50);
+                    g.dispose();
+                    rendered = buffered;
+                }
 
-    public static Client getClientConnection(String droneID){
-        for (Client client : Utils.clients) {
-            if (client.getDroneID().equals(droneID)) {
-                return client;
+                String windowsPath = "C:\\Users\\gabri\\Desktop\\Licenta\\MTADroneService\\MTADroneService\\MTADroneService_server\\DroneService\\images\\";
+                try {
+                    ImageIO.write(rendered, "PNG", new File(windowsPath + imageName + ".png"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-        return null;
-
+        });
+        th1.start();
     }
 
-    public static String serializeMessage(List<String> messages){
-        String messageToSend = "!";
-        for (String message : messages) {
-            messageToSend = messageToSend + message + "!";
+    public static File getFileFromResource(String fileName) throws URISyntaxException {
+        ClassLoader classLoader = Utils.class.getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        if (resource == null) {
+            return null;
+        } else {
+            return new File(resource.toURI());
         }
-        return messageToSend;
     }
-*/
 }

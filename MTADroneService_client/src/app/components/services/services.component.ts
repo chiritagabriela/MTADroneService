@@ -47,7 +47,7 @@ export class ServicesComponent implements OnInit {
       .subscribe(
         data => {
           console.log("succes");
-         this.router.navigate(['/history']);
+         this.router.navigate(['/missions']);
         },
         error =>{
           alert("Please reload the page.");

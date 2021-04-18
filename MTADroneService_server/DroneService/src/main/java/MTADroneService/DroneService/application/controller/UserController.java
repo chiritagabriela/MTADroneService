@@ -1,29 +1,13 @@
-package MTADroneService.DroneService.authentification.controller;
+package MTADroneService.DroneService.application.controller;
 
-import MTADroneService.DroneService.authentification.daos.UserDAO;
-import MTADroneService.DroneService.authentification.dtos.MissionInfoDTO;
-import MTADroneService.DroneService.authentification.dtos.UserInfoDTO;
-import MTADroneService.DroneService.authentification.models.UserModel;
-import MTADroneService.DroneService.authentification.services.TokenService;
-import MTADroneService.DroneService.authentification.services.UserService;
+import MTADroneService.DroneService.application.dtos.UserInfoDTO;
+import MTADroneService.DroneService.application.services.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
-import org.apache.commons.lang3.StringUtils;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.springframework.security.config.web.server.SecurityWebFiltersOrder.AUTHORIZATION;
 
 @RestController
 @RequestMapping("/user")

@@ -5,7 +5,16 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine", "googlemaps"
-    ]
+    ],
+    "target": "es5",
+    "module": "es2015",
+    "lib": [
+      "es5",
+      "dom"
+    ], 
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "files": [
     "src/test.ts",

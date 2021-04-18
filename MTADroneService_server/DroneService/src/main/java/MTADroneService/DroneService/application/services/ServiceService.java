@@ -1,10 +1,10 @@
-package MTADroneService.DroneService.authentification.services;
+package MTADroneService.DroneService.application.services;
 
-import MTADroneService.DroneService.authentification.dtos.MissionInfoDTO;
-import org.springframework.web.multipart.MultipartFile;
+import MTADroneService.DroneService.application.dtos.MissionInfoDTO;
+import MTADroneService.DroneService.application.utility.MissionInfoToSend;
 
 import java.io.IOException;
 
 public interface ServiceService {
-    void createMission(MissionInfoDTO missionInfoDTO) throws IOException;
+    void createMission(MissionInfoDTO missionInfoDTO, String jwtToken, MissionInfoToSend missionInfoToSend) throws IOException;
 }

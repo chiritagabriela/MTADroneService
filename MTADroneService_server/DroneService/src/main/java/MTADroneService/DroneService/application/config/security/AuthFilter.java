@@ -1,6 +1,5 @@
-package MTADroneService.DroneService.authentification.config.security;
+package MTADroneService.DroneService.application.config.security;
 
-import MTADroneService.DroneService.authentification.models.UserModel;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

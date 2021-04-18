@@ -1,4 +1,4 @@
-package MTADroneService.DroneService.authentification.services;
+package MTADroneService.DroneService.application.services;
 
 import io.jsonwebtoken.SigningKeyResolver;
 

@@ -1,5 +1,6 @@
-package MTADroneService.DroneService.authentification.dtos;
+package MTADroneService.DroneService.application.dtos;
 
+import MTADroneService.DroneService.application.utility.DroneCoordinates;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,4 +12,5 @@ public class DroneInfoDTO {
     String droneID;
     String droneModel;
     String droneStatus;
+    DroneCoordinates currentDroneCoordinates;
 }

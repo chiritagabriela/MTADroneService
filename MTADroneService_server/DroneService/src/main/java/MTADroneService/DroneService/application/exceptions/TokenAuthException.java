@@ -1,4 +1,4 @@
-package MTADroneService.DroneService.authentification.exceptions;
+package MTADroneService.DroneService.application.exceptions;
 
 import javax.naming.AuthenticationException;
 

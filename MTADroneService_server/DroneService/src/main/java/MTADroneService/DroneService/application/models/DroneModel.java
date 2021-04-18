@@ -1,4 +1,4 @@
-package MTADroneService.DroneService.authentification.models;
+package MTADroneService.DroneService.application.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DroneModel {
-    @Indexed(direction = IndexDirection.DESCENDING, unique = true)
+    @Indexed(unique = true)
     String droneID;
     String droneModel;
     String droneStatus;

@@ -1,7 +1,7 @@
-package MTADroneService.DroneService.authentification.config;
+package MTADroneService.DroneService.application.config;
 
-import MTADroneService.DroneService.authentification.config.security.AuthFilter;
-import MTADroneService.DroneService.authentification.config.security.MTADroneServiceAuthProvider;
+import MTADroneService.DroneService.application.config.security.AuthFilter;
+import MTADroneService.DroneService.application.config.security.MTADroneServiceAuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -43,7 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 new AntPathRequestMatcher("/token/**"),
                 new AntPathRequestMatcher("/services/**"),
                 new AntPathRequestMatcher("/missions/**"),
-                new AntPathRequestMatcher("/communication/**")
+                new AntPathRequestMatcher("/communication/**"),
+                new AntPathRequestMatcher("/drone/**")
         );
 
         AuthFilter authFilter = new AuthFilter(orRequestMatcher);

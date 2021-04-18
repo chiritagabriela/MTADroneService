@@ -1,10 +1,10 @@
-package MTADroneService.DroneService.authentification.config.security;
+package MTADroneService.DroneService.application.config.security;
 
-import MTADroneService.DroneService.authentification.daos.UserDAO;
-import MTADroneService.DroneService.authentification.exceptions.InvalidTokenException;
-import MTADroneService.DroneService.authentification.exceptions.TokenAuthException;
-import MTADroneService.DroneService.authentification.models.UserModel;
-import MTADroneService.DroneService.authentification.services.TokenService;
+import MTADroneService.DroneService.application.daos.UserDAO;
+import MTADroneService.DroneService.application.exceptions.InvalidTokenException;
+import MTADroneService.DroneService.application.exceptions.TokenAuthException;
+import MTADroneService.DroneService.application.models.UserModel;
+import MTADroneService.DroneService.application.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;

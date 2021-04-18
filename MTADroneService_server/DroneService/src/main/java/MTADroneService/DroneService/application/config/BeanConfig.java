@@ -1,4 +1,4 @@
-package MTADroneService.DroneService.authentification.config;
+package MTADroneService.DroneService.application.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +34,7 @@ public class BeanConfig {
         config.addAllowedMethod(HttpMethod.PUT);
         config.addAllowedMethod(HttpMethod.DELETE);
         config.addAllowedMethod(HttpMethod.OPTIONS);
+        config.addAllowedMethod(HttpMethod.GET);
 
         configSource.registerCorsConfiguration("/**", config);
         return new CorsFilter(configSource);

@@ -1,16 +1,15 @@
-package MTADroneService.DroneService.authentification.services.implementation;
+package MTADroneService.DroneService.application.services.implementation;
 
-import MTADroneService.DroneService.authentification.exceptions.InvalidTokenException;
-import MTADroneService.DroneService.authentification.models.UserModel;
-import MTADroneService.DroneService.authentification.services.AuthSigningKeyResolver;
-import MTADroneService.DroneService.authentification.services.TokenService;
+import MTADroneService.DroneService.application.exceptions.InvalidTokenException;
+import MTADroneService.DroneService.application.models.UserModel;
+import MTADroneService.DroneService.application.services.AuthSigningKeyResolver;
+import MTADroneService.DroneService.application.services.TokenService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.csrf.InvalidCsrfTokenException;
 import org.springframework.stereotype.Service;
 
 @Service

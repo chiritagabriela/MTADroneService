@@ -1,7 +1,6 @@
-package MTADroneService.DroneService.authentification.daos;
+package MTADroneService.DroneService.application.daos;
 
-import MTADroneService.DroneService.authentification.models.UserModel;
-import org.apache.catalina.User;
+import MTADroneService.DroneService.application.models.UserModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

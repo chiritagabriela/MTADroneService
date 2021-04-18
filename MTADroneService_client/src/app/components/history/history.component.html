@@ -9,24 +9,12 @@
             <th>Date</th>
             <th>Drone ID</th>
             </tr>
-            <tr>
-            <td>DA123SD</td>
-            <td>SAR</td>
-            <td>10.12.2021</td>
-            <td>DJI-F450</td>
-            </tr>
-            <tr>
-            <td>DA124SD</td>
-            <td>DELIVERY</td>
-            <td>10.12.2021</td>
-            <td>DJI-F550</td>
-            </tr>
-            <tr>
-            <td>DA125SD</td>
-            <td>SURVEILLANCE</td>
-            <td>10.12.2021</td>
-            <td>DJI-F650</td>
-            </tr>
+            <tr *ngFor="let mission of missionArray">
+                <td>{{mission.missionID}}</td>
+                <td>{{mission.missionType}}</td>
+                <td>{{mission.missionDate}}</td>
+                <td>{{mission.missionDroneID}}</td>
+             </tr>
         </table>
     </div>
 </div>

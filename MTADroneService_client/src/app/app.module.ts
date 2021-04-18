@@ -17,6 +17,11 @@ import { AboutComponent } from './components/about/about.component';
 import { MissionsComponent } from './components/missions/missions.component';
 import { ContactComponent } from './components/contact/contact.component'
 import { AgmCoreModule } from '@agm/core';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+
+
 
 @NgModule({
   declarations: [
@@ -30,18 +35,20 @@ import { AgmCoreModule } from '@agm/core';
     AboutComponent,
     MissionsComponent,
     ContactComponent,
-   
+    ReviewsComponent,
   ],
   imports: [
+    NgImageSliderModule,
     BrowserModule,
     AppRoutingModule,
     MarkdownModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPageScrollCoreModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBTUZQAHPsGITuBpKljuP3pN8Qgk6E_lXg',
       libraries: ['places']
-    })
+    }), 
   ],
   providers: [CookieService,{provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}],
   bootstrap: [AppComponent]

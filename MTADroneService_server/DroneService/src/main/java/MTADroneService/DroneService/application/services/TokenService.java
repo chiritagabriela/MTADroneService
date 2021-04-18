@@ -1,7 +1,7 @@
-package MTADroneService.DroneService.authentification.services;
+package MTADroneService.DroneService.application.services;
 
-import MTADroneService.DroneService.authentification.exceptions.InvalidTokenException;
-import MTADroneService.DroneService.authentification.models.UserModel;
+import MTADroneService.DroneService.application.exceptions.InvalidTokenException;
+import MTADroneService.DroneService.application.models.UserModel;
 
 public interface TokenService {
     void validateToken(String jwtToken) throws InvalidTokenException;

@@ -1,105 +1,53 @@
 <div class="text">Current missions</div>
 <div class="container">
-    <div class="box">
-      <ul style="list-style-type: none; width: 400px; height: 400px;position: relative;">
-        <li style="width: 400px; height: 400px; position:relative"> 
-            <agm-map id="map" [latitude]='lat' [longitude]='long'>
-                <agm-marker 
-                *ngFor="let marker of markers" 
-                [latitude]="marker.lat" 
-                  [longitude]="marker.lng">    
-                      <agm-info-window #infoWindow>
-                          {{ marker.label }}
-                    </agm-info-window>
-            </agm-marker>
-            </agm-map>
-            <div class="card">
-                <div class="additional">
-                    <div class="user-card">
-                    <div class="level center">
-                        Mission 
-                    </div>
-                    <div class="points center">
-                        Mission number
-                    </div>
-                    </div>
-                    <div class="more-info">
-                    <h1>Type of mission</h1>
-                    <div class="coords">
-                        <span>Date</span>
-                    </div>
-                    <div class="coords">
-                        <span>Longitude</span>
-                        <span>Latitude</span>
-                    </div>
-                    <div class="stats">
-                        <div>
-                        <div class="title">Successful</div>
-                        <i class="fa fa-trophy"></i>
-                        <div class="value">yes</div>
+    <h3 style="position: relative;" *ngIf="!missionStart">Currently, there is no mission on the run or no drone available for your mission.</h3>
+    <div *ngIf="missionStart" class="box">
+        <ul style="list-style-type: none; width: 400px; height: 400px;position: relative;">
+            <li style="width: 400px; height: 400px; position:relative"> 
+                <agm-map id="map" [latitude]='lat' [longitude]='long'>
+                    <agm-marker 
+                    *ngFor="let marker of markers" 
+                    [latitude]="marker.currentLatitude" 
+                    [longitude]="marker.currentLongitude">    
+                        <agm-info-window #infoWindow>
+                            {{ marker.label }}
+                        </agm-info-window>
+                </agm-marker>
+                </agm-map>
+                <a style="position: relative;top:-90%;left:17%;font-size: 25px;" href="https://mtadroneservice.loca.lt/?action=stream"  target="_blank">Click here to see live video</a>
+                <div class="card">
+                    <div class="additional">
+                        <div class="user-card">
+                        <div class="level center">
+                            mission_type:{{missionModel.missionType}} 
                         </div>
-                        <div>
-                        <div class="title">Time</div>
-                        <i class="fa fa-gamepad"></i>
-                        <div class="value">27</div>
+                        <div class="points center" style="font-size: 7px;">
+                            mission_ID:{{missionModel.missionID}} 
+                        </div>
+                        </div>
+                        <div class="more-info">
+                        <h1 style="font-size: 18px;position: relative;top:30%;">droneID:{{missionModel.missionDroneInfo.droneID}}</h1>
+                        <div style="position: relative;left:10px;" class="coords">
+                            <span style="position: relative;top:20%;">Lon:{{missionModel.missionLongitudeEnd}}</span>
+                            <span style="position: relative;top:20%;">Lat:{{missionModel.missionLatitudeEnd}}</span>
+                        </div>
+                        <div class="stats">
+                            <div>
+                            <div style="position: relative;top:-12px;" class="title">Date:{{missionModel.missionDate}}</div>
+                            <i class="fa fa-gamepad"></i>
+                            <div class="value"></div>
+                            </div>
+                        </div>
                         </div>
                     </div>
+                    <div class="general">
+                        <h1 style="font-size: 20px; color: black;top:10%;position: relative;"><b>status:{{missionStatus}}</b></h1>
+                        <p style="top:20%;position: relative;color: black;">The aim of this mission is to search people in the given area and send image of found ones to the interface.</p>
+                        <span style="color: black;" class="more">Mouse over the card for more info</span>
                     </div>
-                </div>
-                <div class="general">
-                    <h1>Mission status</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
-                    <span class="more">Mouse over the card for more info</span>
-                </div>
-            </div> 
-            <ul id="images">
-                <li><img src="./assets/images/lidar.jpg"></li>
-                <li><img src="./assets/images/lidar.jpg"></li>
-                <li><img src="./assets/images/lidar.jpg"></li>
-            </ul>
-        </li> 
-        <li style="width: 400px; height: 400px; position:relative">
-            <agm-map [latitude]='lat' [longitude]='long'></agm-map>
-            <div class="card">
-                <div class="additional">
-                    <div class="user-card">
-                    <div class="level center">
-                        Mission 
-                    </div>
-                    <div class="points center">
-                        Mission number
-                    </div>
-                    </div>
-                    <div class="more-info">
-                    <h1>Type of mission</h1>
-                    <div class="coords">
-                        <span>Date</span>
-                    </div>
-                    <div class="coords">
-                        <span>Longitude</span>
-                        <span>Latitude</span>
-                    </div>
-                    <div class="stats">
-                        <div>
-                        <div class="title">Successful</div>
-                        <i class="fa fa-trophy"></i>
-                        <div class="value">yes</div>
-                        </div>
-                        <div>
-                        <div class="title">Time</div>
-                        <i class="fa fa-gamepad"></i>
-                        <div class="value">27</div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="general">
-                    <h1>Mission status</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
-                    <span class="more">Mouse over the card for more info</span>
-                </div>
-            </div> 
-        </li> 
-      </ul>
+                </div> 
+                <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+            </li> 
+        </ul>
     </div>
   </div> 

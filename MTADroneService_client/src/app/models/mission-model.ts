@@ -1,12 +1,12 @@
 import {DroneModel} from 'src/app/models/drone-model'
+import { DroneCoordinatesModel } from './drone-coord-model';
 export class MissionModel{
     missionID:string="";
-    missionDrone:DroneModel=new DroneModel("","","");
+    missionUserID:string="";
+    missionDroneInfo!:DroneModel;
     missionType:string="";
-    missionLongitudeStart:string="";
     missionLatitudeEnd:string="";
     missionLongitudeEnd:string="";
-    missionLatitudeStart:string="";
     missionDate:string="";
     missionStatus:string="";
 }

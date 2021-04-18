@@ -1,4 +1,4 @@
-package MTADroneService.DroneService.authentification.dtos;
+package MTADroneService.DroneService.application.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

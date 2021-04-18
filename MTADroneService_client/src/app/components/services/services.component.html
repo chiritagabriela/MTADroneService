@@ -1,10 +1,11 @@
+<div class="text">Services</div>
 <div class="container d-flex justify-content-center">
     <div class="row">
         <div class="col-md-4" style="height: 400px;">
             <div class="card p-3 py-4 mt-5 mb-5" style="height: 500px;">
                 <form [formGroup]="deliveryForm" (ngSubmit)="onSubmitDelivery()">
                     <div class="text-center"> <img src="assets/images/medical.jpg" width="200" height="150" class="rounded-circle">
-                        <h3 class="mt-2">Delivery</h3>
+                        <h3 class="mt-2">Delivery<h6 style="font-size: 10px;color: red;"><b>NOT AVAILABLE YET</b></h6></h3>
                         <div class="form-group">
                             <label for="missionLongitudeStart">Longitude pick-up</label>
                             <input type="text"
@@ -49,7 +50,7 @@
                                 <div *ngIf="fDelivery.missionLatitudeEnd.errors.required">Latitude to deliver is required!</div>
                             </div>
                         </div>
-                        <button style="background-color: #157FBE;" type="submit" class="btn btn-info">Send drone!</button>
+                        <button style="background-color: #157FBE;" type="submit" class="btn btn-info">Send drone!</button>  
                     </div>
                 </form>
             </div>
@@ -58,7 +59,7 @@
             <div class="card p-3 py-4 mt-5" style="height: 500px;">
                 <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
                     <div class="text-center"> <img src="assets/images/sar.jpg" width="200" height="150" class="rounded-circle">
-                        <h3 class="mt-2">Search and rescue</h3> 
+                        <h3 class="mt-2">Search and rescue<h6 style="font-size: 10px;color: transparent;"><b>NOT AVAILABLE YET</b></h6></h3> 
                         <div class="form-group">
                             <label for="missionLongitudeEnd">Longitude</label>
                             <input type="text"
@@ -82,7 +83,7 @@
                             </div>
                         </div>
                         <p>Point is the center of a 3 meters square.</p>
-                        <button style="background-color: #157FBE;top:75px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
+                        <button style="background-color: #157FBE;top: 76px;position: relative;" type="submit" class="btn btn-info">Send drone!</button>
                     </div>
                 </form>
             </div>
@@ -91,7 +92,7 @@
             <div class="card p-3 py-4 mt-5" style="height: 500px;">
                 <form [formGroup]="surveillanceForm" (ngSubmit)="onSubmitSurveillance()">
                     <div class="text-center"> <img src="assets/images/terrain.jpg" width="200" height="150" class="rounded-circle">
-                        <h3 class="mt-2">Terrain surveillance</h3>
+                        <h3 class="mt-2">Terrain surveillance<h6 style="font-size: 10px;color: red;"><b>NOT AVAILABLE YET</b></h6></h3>
                         <div class="form-group">
                             <label for="missionLongitudeEnd">Longitude</label>
                             <input type="text"
@@ -115,7 +116,7 @@
                             </div>
                         </div>
                         <p>Point is the center of a 3 meters square.</p>
-                        <button style="background-color: #157FBE;position: relative;top:75px;" type="submit" class="btn btn-info">Send drone!</button>
+                        <button style="background-color: #157FBE;position: relative;top:76px;" type="submit" class="btn btn-info">Send drone!</button>
                     </div>
                 </form>
             </div>
