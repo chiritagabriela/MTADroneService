@@ -45,6 +45,7 @@ stream_locally = 0
 video_sent = 0
 lat_base = ""
 lon_base = ""
+mission_started = 0
 
 ####################FUNCTIONS################################
 
@@ -207,7 +208,7 @@ def main_programme_thread4(name):
 	global lon_base
 	global lat_base
 	global mission_finished
-
+	global mission_started
 	lat_to_go = ""
 	lon_to_go = ""
 	mission_type = ""
@@ -252,14 +253,16 @@ def main_programme_thread4(name):
 
 def send_pos_to_server_thread1(name):
 	global mission_finished
+	global mission_started
 	while(mission_finished == 0):
-		time.sleep(3)
-		headers ={'Content-Type': 'application/json'}
-		data_to_send = { 'currentLatitude':vehicle.location.global_relative_frame.lat,'currentLongitude':vehicle.location.global_relative_frame.lon }
-		url_to_send = 'http://172.20.10.2:8888/communication/store_current_location/' + get_mac_address()
-		response = requests.post(url_to_send, data=json.dumps(data_to_send), headers = headers)
-		print("[+]Position:{lat:"+str(vehicle.location.global_relative_frame.lat)+"-lon:"+
-			str(vehicle.location.global_relative_frame.lon)+"} sent to server.")
+		if( mission_started == 1):
+			time.sleep(3)
+			headers ={'Content-Type': 'application/json'}
+			data_to_send = { 'currentLatitude':vehicle.location.global_relative_frame.lat,'currentLongitude':vehicle.location.global_relative_frame.lon }
+			url_to_send = 'http://172.20.10.2:8888/communication/store_current_location/' + get_mac_address()
+			response = requests.post(url_to_send, data=json.dumps(data_to_send), headers = headers)
+			print("[+]Position:{lat:"+str(vehicle.location.global_relative_frame.lat)+"-lon:"+
+				str(vehicle.location.global_relative_frame.lon)+"} sent to server.")
 
 def send_video_url():
 	global video_sent
@@ -270,7 +273,6 @@ def send_video_url():
 			url_to_send = 'http://172.20.10.2:8888/communication/set_video_url/' + get_mac_address() + '/' + 'mtadroneservice.loca.lt'
 			response = requests.post(url_to_send, headers=headers)
 			break
-
 
 def send_stream_to_server_thread3(name):
 	global video_sent
