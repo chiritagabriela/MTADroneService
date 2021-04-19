@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Class defining the user DAO.
+ *
+ * @author Chirita Gabriela
+ */
 @Repository
 public interface UserDAO extends MongoRepository<UserModel,String> {
     Optional<UserModel> findByJwtToken(String jwtToken);

@@ -15,11 +15,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+/**
+ * Class defining the drone controller.
+ * This controller is in charge of the communication between drone and server.
+ * @author Chirita Gabriela
+ */
 @RestController
 @RequestMapping("/drone")
 @Slf4j
 public class DroneController {
 
+    /**
+     * Member description
+     */
     @Autowired
     ModelMapper modelMapper;
 
@@ -29,6 +38,11 @@ public class DroneController {
     @Autowired
     DroneService droneService;
 
+    /**
+     * Method getCurrentPosition.
+     * It's used by interface in order to get drone's current position, status and photos.
+     * @param droneID is the unique ID of the drone.
+     */
     @GetMapping(value = "/get_current_position/{droneID}")
     @PreAuthorize("hasAnyRole('USER')")
     DroneInfoDTO getCurrentPosition(@PathVariable String droneID){

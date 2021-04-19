@@ -15,12 +15,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.*;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Class defining the UserService service's implementation.
+ * It is used to implement the business logic for user service.
+ * @author Chirita Gabriela
+ */
 @Service
 public class UserServiceImpl implements UserService {
+
+    /**
+     * Member description
+     */
     @Autowired
     ModelMapper modelMapper;
 
@@ -33,6 +40,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+    /**
+     * Method createUser.
+     * It's used to create a new user.
+     * @param userInfoDTO is the information needed from the interface in order to create a new user.
+     */
     @Override
     public void createUser(UserInfoDTO userInfoDTO) {
 
@@ -52,6 +65,11 @@ public class UserServiceImpl implements UserService {
         modelMapper.map(userModel, userInfoDTO);
     }
 
+    /**
+     * Method loginUser.
+     * It's used to login a user.
+     * @param userInfoDTO is the information needed from the interface in order to login a user.
+     */
     @Override
     public UserInfoDTO loginUser(UserInfoDTO userInfoDTO) {
         Optional<UserModel> userModelOptional = userDAO.findByUsername(userInfoDTO.getUsername());

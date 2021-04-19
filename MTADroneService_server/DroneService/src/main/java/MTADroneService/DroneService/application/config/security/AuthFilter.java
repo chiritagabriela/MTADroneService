@@ -20,19 +20,35 @@ import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+/**
+ * Class defining authentification filter of the application.
+ * This class checks if an user has the authority to enter website.
+ * @author Chirita Gabriela
+ */
 
 public class AuthFilter extends AbstractAuthenticationProcessingFilter {
 
+    /**
+     * Auth filter class constructor.
+     */
     public AuthFilter(String defaultFilterProcessesUrl) {
         super(defaultFilterProcessesUrl);
     }
 
+    /**
+     * Auth filter class constructor.
+     */
     public AuthFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
         super(requiresAuthenticationRequestMatcher);
     }
 
+
+    /**
+     * Method attemptAuthentication.
+     * Verifies the header of the request and give users a role.
+     */
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
         String tokenUnstrapped = request.getHeader(AUTHORIZATION);
         String token = StringUtils.removeStart(Optional.ofNullable(tokenUnstrapped).orElse(""), "Bearer").trim();
 
@@ -46,12 +62,18 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
         return getAuthenticationManager().authenticate(authentication);
     }
 
+    /**
+     * Method successfulAuthentication.
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         SecurityContextHolder.getContext().setAuthentication(authResult);
         chain.doFilter(request, response);
     }
 
+    /**
+     * Method unsuccessfulAuthentication.
+     */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
 

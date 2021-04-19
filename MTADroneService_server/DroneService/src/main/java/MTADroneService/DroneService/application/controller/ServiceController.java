@@ -15,14 +15,29 @@ import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+
+/**
+ * Class defining the services controller.
+ * This controller helps at creating missions.
+ * @author Chirita Gabriela
+ */
 @RestController
 @RequestMapping("/services")
 @Slf4j
 public class ServiceController {
 
+    /**
+     * Member description
+     */
     @Autowired
     ServiceService serviceService;
 
+    /**
+     * Method createSearchMission.
+     * Creates a SAR mission.
+     * @param tokenUnstrapped is jwt token of the user, including its header.
+     * @param  missionInfoDTO provides the information from interface.
+     */
     @PostMapping(value = "/search")
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createSearchMission(@RequestBody MissionInfoDTO missionInfoDTO,
@@ -38,6 +53,12 @@ public class ServiceController {
         return missionInfoDTO;
     }
 
+    /**
+     * Method createSurveilMission.
+     * Creates a SURVEIL mission.
+     * @param tokenUnstrapped is jwt token of the user, including its header.
+     * @param  missionInfoDTO provides the information from interface.
+     */
     @PostMapping(value = "/surveil")
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createSurveilMission(@RequestBody MissionInfoDTO missionInfoDTO,
@@ -53,6 +74,12 @@ public class ServiceController {
         return missionInfoDTO;
     }
 
+    /**
+     * Method createDeliveryMission.
+     * Creates a DELIVERY mission.
+     * @param tokenUnstrapped is jwt token of the user, including its header.
+     * @param  missionInfoDTO provides the information from interface.
+     */
     @PostMapping(value = "/delivery")
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createDeliveryMission(@RequestBody MissionInfoDTO missionInfoDTO,

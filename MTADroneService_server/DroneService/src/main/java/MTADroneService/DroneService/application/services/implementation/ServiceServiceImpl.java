@@ -14,14 +14,20 @@ import MTADroneService.DroneService.application.utility.Utils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Class defining the ServiceService service's implementation.
+ * It is used to implement the business logic for service service.
+ * @author Chirita Gabriela
+ */
 @Service
 public class ServiceServiceImpl implements ServiceService {
 
+    /**
+     * Member description
+     */
     @Autowired
     ModelMapper modelMapper;
 
@@ -34,9 +40,16 @@ public class ServiceServiceImpl implements ServiceService {
     @Autowired
     UserDAO userDAO;
 
+    /**
+     * Method createMission.
+     * It's used to create a mission after the information received from interface.
+     * @param missionInfoDTO is the mission information from interface.
+     * @param jwtToken is the jwtToken of the user.
+     * @param missionInfoToSend is the mission information stored in server.
+     */
     @Override
     public void createMission(MissionInfoDTO missionInfoDTO, String jwtToken,
-                              MissionInfoToSend missionInfoToSend) throws IOException {
+                              MissionInfoToSend missionInfoToSend){
 
         MissionModel missionModel = modelMapper.map(missionInfoDTO, MissionModel.class);
         missionModel.setMissionStatus(Utils.MissionStatus.PREPARING.toString());

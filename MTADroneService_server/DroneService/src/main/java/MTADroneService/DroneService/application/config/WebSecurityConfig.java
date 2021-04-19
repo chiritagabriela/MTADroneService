@@ -12,13 +12,28 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
+
+/**
+ * Class defining configurations for web security adapter.
+ *
+ * @author Chirita Gabriela
+ */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Member description
+     */
     @Autowired
     MTADroneServiceAuthProvider mtaDroneServiceAuthProvider;
 
+
+    /**
+     * Method configure.
+     * Configures the web security adapter of the application.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -36,8 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors();
 
     }
-    public AuthFilter authFilter() throws Exception {
 
+    /**
+     * Method authFilter.
+     * Defines the authentification filter of the application.
+     */
+    public AuthFilter authFilter() throws Exception {
         OrRequestMatcher orRequestMatcher = new OrRequestMatcher(
                 new AntPathRequestMatcher("/user/**"),
                 new AntPathRequestMatcher("/token/**"),

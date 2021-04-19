@@ -18,19 +18,34 @@ import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-
+/**
+ * Class defining abstract user details for authentification provider.
+ *
+ * @author Chirita Gabriela
+ */
 @Component
 public class MTADroneServiceAuthProvider extends AbstractUserDetailsAuthenticationProvider {
 
+
+    /**
+     * Member description
+     */
     @Autowired
     UserDAO userDAO;
 
     @Autowired
     TokenService tokenService;
 
+    /**
+     * Method additionalAuthenticationChecks.
+     */
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException { }
 
+
+    /**
+     * Method retrieveUser.
+     */
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentification) throws AuthenticationException {
         final String token = (String) authentification.getCredentials();

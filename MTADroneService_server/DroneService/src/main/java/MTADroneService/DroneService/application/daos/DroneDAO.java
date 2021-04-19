@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class defining the drone DAO.
+ *
+ * @author Chirita Gabriela
+ */
 @Repository
 public interface DroneDAO extends MongoRepository<DroneModel,String> {
     List<DroneModel> findByDroneStatus(String droneStatus);

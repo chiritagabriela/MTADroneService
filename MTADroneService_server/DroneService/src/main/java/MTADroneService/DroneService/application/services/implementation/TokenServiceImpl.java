@@ -12,11 +12,25 @@ import io.jsonwebtoken.security.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Class defining the TokenService service's implementation.
+ * It is used to implement the business logic for token service.
+ * @author Chirita Gabriela
+ */
 @Service
 public class TokenServiceImpl implements TokenService {
+
+    /**
+     * Member description
+     */
     @Autowired
     AuthSigningKeyResolver authSigningKeyResolver;
 
+    /**
+     * Method validateToken.
+     * It's used to validate the user's token.
+     * @param jwtToken is the ID of the drone.
+     */
     @Override
     public void validateToken(String jwtToken) throws InvalidTokenException {
         try {
@@ -29,6 +43,11 @@ public class TokenServiceImpl implements TokenService {
         }
     }
 
+    /**
+     * Method generateNewToken.
+     * It's used to generate a new token for a user.
+     * @param userModel is the user for which the token is generated.
+     */
     @Override
     public void generateNewToken(UserModel userModel) {
         String jwtToken;

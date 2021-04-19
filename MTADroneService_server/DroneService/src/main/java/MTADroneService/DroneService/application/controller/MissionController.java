@@ -20,11 +20,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+/**
+ * Class defining the mission controller.
+ * This controller provides information about missions to the interface.
+ * @author Chirita Gabriela
+ */
 @RestController
 @RequestMapping("/missions")
 @Slf4j
 public class MissionController {
 
+    /**
+     * Member description
+     */
     @Autowired
     private MissionService missionService;
 
@@ -37,6 +45,11 @@ public class MissionController {
     @Autowired
     private UserDAO userDAO;
 
+    /**
+     * Method getMissionDetails.
+     * It's used by interface in order to get information about current mission.
+     * @param tokenUnstrapped is jwt token of the user, including its header.
+     */
     @GetMapping(value = "/current_mission")
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO getMissionDetails(@RequestHeader(name = "Authorization") String tokenUnstrapped) {
@@ -68,6 +81,11 @@ public class MissionController {
         return null;
     }
 
+    /**
+     * Method getAllMissions.
+     * It's used by interface in order to get information about all mission.
+     * @param tokenUnstrapped is jwt token of the user, including its header.
+     */
     @GetMapping(value = "/all_missions")
     @PreAuthorize("hasAnyRole('USER')")
     public List<MissionModel> getAllMissions(@RequestHeader(name = "Authorization") String tokenUnstrapped) {

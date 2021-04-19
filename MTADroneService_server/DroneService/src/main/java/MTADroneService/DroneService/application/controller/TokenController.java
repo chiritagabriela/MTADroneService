@@ -12,13 +12,25 @@ import javax.servlet.http.HttpServletRequest;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+/**
+ * Class defining the token controller.
+ * This controller is used to perform operations related to the JWT Token.
+ * @author Chirita Gabriela
+ */
 @RestController
 @RequestMapping("/token")
 public class TokenController {
 
+    /**
+     * Member description
+     */
     @Autowired
     TokenService tokenService;
 
+    /**
+     * Method validateToken.
+     * Validates the jwt token that is provided from the user in order to authenticate to server.
+     */
     @GetMapping("/validate")
     @PreAuthorize("hasAnyRole('USER','ANONYMOUS')")
     public void validateToken(HttpServletRequest httpServletRequest) throws Exception{

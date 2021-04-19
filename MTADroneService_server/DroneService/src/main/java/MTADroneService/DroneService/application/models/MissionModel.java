@@ -10,18 +10,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
+/**
+ * Class defining the mission model.
+ *
+ * @author Chirita Gabriela
+ */
 @Data
 @Document(collection = "mission")
 @NoArgsConstructor
 @AllArgsConstructor
 public class MissionModel {
+    /**
+     * Member description
+     */
     @Id
     String missionID;
     String missionDroneID;
     String missionType;
     String missionLatitudeEnd;
     String missionLongitudeEnd;
-    Date missionDate;
+    String missionDate;
     String missionStatus;
     String userID;
 }

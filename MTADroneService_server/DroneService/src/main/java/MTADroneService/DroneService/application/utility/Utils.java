@@ -8,8 +8,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,14 +17,25 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Class defining the Utils of the server.
+ * It provides all the additional members and methods that server needs.
+ * @author Chirita Gabriela
+ */
 public class Utils {
 
+    /**
+     * Member description
+     */
+
+    //defining the type of missions available.
     public enum MissionTypes {
         SAR,
         DELIVERY,
         SURVEILLANCE
     }
 
+    //defining the status of the mission.
     public enum MissionStatus {
         PREPARING,
         FLYING_TO_INTEREST_POINT,
@@ -36,15 +45,26 @@ public class Utils {
         FINISHED
     }
 
+    //defining the status of the drone.
     public enum DroneStatus{
         AVAILABLE,
         BUSY
     }
 
+    //defining the image number that is global to the server. This number is reset after each mission.
     public static AtomicInteger imageNumber = new AtomicInteger(0);
+    //defining the concurrent map that holds the current position of the drone, along with other information.
     public static final Map<String, DroneCoordinates> currentPosition = new ConcurrentHashMap<>();
+    //defining the concurrent map that holds the information of current mission.
     public static final Map<String, MissionInfoToSend> missionDetails = new ConcurrentHashMap<>();
 
+
+    /**
+     * Method updateDronePosition.
+     * It's used to update the position of drone with every request received.
+     * @param droneID it the ID of the drone.
+     * @param droneCoordinates are the current coordinates of the drone.
+     */
     public static void updateDronePosition(String droneID, DroneCoordinates droneCoordinates) {
         if(droneCoordinates != null) {
             currentPosition.get(droneID).setCurrentLongitude(droneCoordinates.currentLongitude);
@@ -52,33 +72,71 @@ public class Utils {
         }
     }
 
+    /**
+     * Method addMissionInfoToSend.
+     * It's used to update the list of missions stored in the server.
+     * @param droneID it the ID of the drone.
+     * @param missionInfoToSend are the details of the current mission.
+     */
     public static void addMissionInfoToSend(String droneID, MissionInfoToSend missionInfoToSend){
         missionDetails.put(droneID,missionInfoToSend);
     }
 
+    /**
+     * Method addNewImage.
+     * It's used to update the list of images.
+     * @param droneID it the ID of the drone.
+     * @param imageName is the name of the image.
+     */
     public static synchronized void addNewImage(String droneID, String imageName){
         currentPosition.get(droneID).getImages().add(imageName);
     }
 
+    /**
+     * Method updateMissionStatus.
+     * It's used to update the status of the mission.
+     * @param droneID it the ID of the drone.
+     * @param newMissionStatus is the new status of the mission.
+     */
     public static void updateMissionStatus(String droneID, String newMissionStatus){
         if(Utils.currentPosition.size() != 0) {
             Utils.currentPosition.get(droneID).setMissionStatus(newMissionStatus);
         }
     }
 
+    /**
+     * Method getDronePosition.
+     * It's used to get the current position of the drone.
+     * @param droneID it the ID of the drone.
+     */
     public static DroneCoordinates getDronePosition(String droneID) {
         return currentPosition.get(droneID);
     }
 
+    /**
+     * Method getMissionInfoToSend.
+     * It's used to get information about the current mission.
+     * @param droneID it the ID of the drone.
+     */
     public static MissionInfoToSend getMissionInfoToSend(String droneID){ return missionDetails.get(droneID); }
 
-    public static void removeMissionInfoToSend(String droneID){Utils.missionDetails.remove(droneID);}
-
-    public static Date getCurrentDate(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return new Date(System.currentTimeMillis());
+    /**
+     * Method getCurrentDate.
+     * It's used to get the current date.
+     */
+    public static String getCurrentDate(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        return formatter.format(date);
     }
 
+    /**
+     * Method saveImage.
+     * It's used to save the image to server.
+     * @param byteImage is the array of bites of the image.
+     * @param imageName is the name of the image.
+     * @param droneCoordinates are the current drone coordinates.
+     */
     public static void saveImage(byte[] byteImage, String imageName, DroneCoordinates droneCoordinates) {
         Thread th1 = new Thread(new Runnable() {
             @SneakyThrows
@@ -114,16 +172,11 @@ public class Utils {
         th1.start();
     }
 
-    public static File getFileFromResource(String fileName) throws URISyntaxException {
-        ClassLoader classLoader = Utils.class.getClassLoader();
-        URL resource = classLoader.getResource(fileName);
-        if (resource == null) {
-            return null;
-        } else {
-            return new File(resource.toURI());
-        }
-    }
-
+    /**
+     * Method deletePhoto.
+     * It's used to delete an image from the server.
+     * @param pictureName is the name of the image.
+     */
     public static void deletePhoto(String pictureName){
         Path imagesPath = Paths.get("C:\\Users\\gabri\\Desktop\\Licenta\\MTADroneService\\MTADroneService\\MTADroneService_server\\DroneService\\images\\" + pictureName);
         try {
@@ -139,6 +192,11 @@ public class Utils {
         }
     }
 
+    /**
+     * Method deleteAllCurrentPhotos.
+     * It's used to delete all the images from a certain drone.
+     * @param droneID is the ID of the drone.
+     */
     public static void deleteAllCurrentPhotos(String droneID){
         for(int i=0;i<Utils.getDronePosition(droneID).getImages().size();i++){
             deletePhoto(Utils.getDronePosition(droneID).getImages().get(i) + ".png");
