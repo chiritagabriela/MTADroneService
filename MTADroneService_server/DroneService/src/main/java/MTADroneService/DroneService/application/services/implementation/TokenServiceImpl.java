@@ -9,6 +9,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.SignatureException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,8 @@ public class TokenServiceImpl implements TokenService {
     @Autowired
     AuthSigningKeyResolver authSigningKeyResolver;
 
+    final Logger logger = LoggerFactory.getLogger(TokenServiceImpl.class);
+
     /**
      * Method validateToken.
      * It's used to validate the user's token.
@@ -33,6 +37,7 @@ public class TokenServiceImpl implements TokenService {
      */
     @Override
     public void validateToken(String jwtToken) throws InvalidTokenException {
+        logger.info("Token service:token " + jwtToken + " validated.");
         try {
             Jwts.parserBuilder()
                     .setSigningKeyResolver(authSigningKeyResolver)
@@ -50,6 +55,7 @@ public class TokenServiceImpl implements TokenService {
      */
     @Override
     public void generateNewToken(UserModel userModel) {
+        logger.info("Token service:token generated for user " + userModel.getUsername() + ".");
         String jwtToken;
         jwtToken = Jwts.builder()
                 .setSubject(userModel.getUsername())

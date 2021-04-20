@@ -3,6 +3,8 @@ package MTADroneService.DroneService.application.services.implementation;
 import MTADroneService.DroneService.application.daos.MissionDAO;
 import MTADroneService.DroneService.application.models.MissionModel;
 import MTADroneService.DroneService.application.services.MissionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,7 @@ public class MissionServiceImpl implements MissionService {
     @Autowired
     private MissionDAO missionDAO;
 
+    final Logger logger = LoggerFactory.getLogger(MissionServiceImpl.class);
     /**
      * Method getMissionDetails.
      * It's used to retrieve information about user's active mission.
@@ -30,6 +33,7 @@ public class MissionServiceImpl implements MissionService {
      */
     @Override
     public List<MissionModel> getMissionDetails(String userID) {
+        logger.info("Mission service:retrieved mission details for user " + userID + ".");
         return missionDAO.findByUserID(userID);
     }
 
@@ -40,6 +44,7 @@ public class MissionServiceImpl implements MissionService {
      */
     @Override
     public Optional<MissionModel> getMissionByID(String missionID) {
+        logger.info("Mission service:retrieved mission details for mission " + missionID + ".");
         return missionDAO.findById(missionID);
     }
 
@@ -50,6 +55,7 @@ public class MissionServiceImpl implements MissionService {
      */
     @Override
     public List<MissionModel> getMissionByDroneID(String droneID) {
+        logger.info("Mission service:retrieved mission details for drone " + droneID + ".");
         return missionDAO.findByMissionDroneID(droneID);
     }
 }

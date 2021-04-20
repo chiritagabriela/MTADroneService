@@ -3,6 +3,8 @@ package MTADroneService.DroneService.application.services.implementation;
 import MTADroneService.DroneService.application.daos.DroneDAO;
 import MTADroneService.DroneService.application.models.DroneModel;
 import MTADroneService.DroneService.application.services.DroneService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,8 @@ public class DroneServiceImpl implements DroneService {
     @Autowired
     DroneDAO droneDAO;
 
+    final Logger logger = LoggerFactory.getLogger(DroneServiceImpl.class);
+
     /**
      * Method getDroneInfo.
      * It's used to retrieve information about a drone after its ID.
@@ -30,6 +34,7 @@ public class DroneServiceImpl implements DroneService {
      */
     @Override
     public Optional<DroneModel> getDroneInfo(String missionDroneID) {
+        logger.info("Drone service:drone info retrieved for mission with ID:"+missionDroneID+".");
         return droneDAO.findByDroneID(missionDroneID);
     }
 
@@ -39,6 +44,7 @@ public class DroneServiceImpl implements DroneService {
      */
     @Override
     public List<DroneModel> getAllDrones() {
+        logger.info("Drone service:drone info retrieved for all drones.");
         return droneDAO.findAll();
     }
 }

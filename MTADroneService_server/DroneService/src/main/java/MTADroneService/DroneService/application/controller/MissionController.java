@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +47,8 @@ public class MissionController {
     @Autowired
     private UserDAO userDAO;
 
+    final Logger logger = LoggerFactory.getLogger(MissionController.class);
+
     /**
      * Method getMissionDetails.
      * It's used by interface in order to get information about current mission.
@@ -59,10 +63,9 @@ public class MissionController {
 
         Optional<UserModel> optionalUserModel = userDAO.findByJwtToken(jwtToken);
         if (optionalUserModel.isPresent()) {
-
             UserModel userModel = optionalUserModel.get();
             List<MissionModel> missionModelList = missionService.getMissionDetails(userModel.getUserID());
-
+            logger.info("Mission controller:Information about current mission taken by user " + userModel.getUsername() + ".");
             if (missionModelList.size() != 0) {
                 for (MissionModel model : missionModelList) {
                     if (!model.getMissionStatus().equals("FINISHED")) {
@@ -92,13 +95,11 @@ public class MissionController {
         List<MissionModel> missionModelListToShow = new ArrayList<>();
         String jwtToken = StringUtils.removeStart(Optional.ofNullable(tokenUnstrapped).orElse(""), "Bearer").trim();
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-
         Optional<UserModel> optionalUserModel = userDAO.findByJwtToken(jwtToken);
         if (optionalUserModel.isPresent()) {
-
             UserModel userModel = optionalUserModel.get();
             List<MissionModel> missionModelList = missionService.getMissionDetails(userModel.getUserID());
-
+            logger.info("Mission controller:Information about all missions taken by user " + userModel.getUsername() + ".");
             if (missionModelList.size() != 0) {
                 for (MissionModel model : missionModelList) {
                     if (model.getMissionStatus().equals("FINISHED")) {

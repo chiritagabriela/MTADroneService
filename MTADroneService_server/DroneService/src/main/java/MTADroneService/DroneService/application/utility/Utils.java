@@ -1,5 +1,8 @@
 package MTADroneService.DroneService.application.utility;
+import MTADroneService.DroneService.application.services.implementation.UserServiceImpl;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -58,6 +61,7 @@ public class Utils {
     //defining the concurrent map that holds the information of current mission.
     public static final Map<String, MissionInfoToSend> missionDetails = new ConcurrentHashMap<>();
 
+    final static Logger logger = LoggerFactory.getLogger(Utils.class);
 
     /**
      * Method updateDronePosition.
@@ -67,6 +71,8 @@ public class Utils {
      */
     public static void updateDronePosition(String droneID, DroneCoordinates droneCoordinates) {
         if(droneCoordinates != null) {
+            logger.info("Drone position updated at latitude:"+droneCoordinates.getCurrentLatitude()+" and longitude:"
+                    + droneCoordinates.getCurrentLongitude()+".");
             currentPosition.get(droneID).setCurrentLongitude(droneCoordinates.currentLongitude);
             currentPosition.get(droneID).setCurrentLatitude(droneCoordinates.currentLatitude);
         }
@@ -79,6 +85,7 @@ public class Utils {
      * @param missionInfoToSend are the details of the current mission.
      */
     public static void addMissionInfoToSend(String droneID, MissionInfoToSend missionInfoToSend){
+        logger.info("New mission stored for drone " + droneID + ".");
         missionDetails.put(droneID,missionInfoToSend);
     }
 
@@ -89,6 +96,7 @@ public class Utils {
      * @param imageName is the name of the image.
      */
     public static synchronized void addNewImage(String droneID, String imageName){
+        logger.info("New image added for drone " + droneID + ".");
         currentPosition.get(droneID).getImages().add(imageName);
     }
 
@@ -101,6 +109,7 @@ public class Utils {
     public static void updateMissionStatus(String droneID, String newMissionStatus){
         if(Utils.currentPosition.size() != 0) {
             Utils.currentPosition.get(droneID).setMissionStatus(newMissionStatus);
+            logger.info("Status updated to " + newMissionStatus + " for drone " + droneID + ".");
         }
     }
 
@@ -110,6 +119,7 @@ public class Utils {
      * @param droneID it the ID of the drone.
      */
     public static DroneCoordinates getDronePosition(String droneID) {
+        logger.info("Drone position retrieved for drone " + droneID + ".");
         return currentPosition.get(droneID);
     }
 
@@ -118,7 +128,9 @@ public class Utils {
      * It's used to get information about the current mission.
      * @param droneID it the ID of the drone.
      */
-    public static MissionInfoToSend getMissionInfoToSend(String droneID){ return missionDetails.get(droneID); }
+    public static MissionInfoToSend getMissionInfoToSend(String droneID){
+        logger.info("Mission information retrieved for drone " + droneID + ".");
+        return missionDetails.get(droneID); }
 
     /**
      * Method getCurrentDate.
@@ -138,6 +150,7 @@ public class Utils {
      * @param droneCoordinates are the current drone coordinates.
      */
     public static void saveImage(byte[] byteImage, String imageName, DroneCoordinates droneCoordinates) {
+        logger.info("Image " + imageName + " saved to server.");
         Thread th1 = new Thread(new Runnable() {
             @SneakyThrows
             public void run() {
@@ -198,6 +211,7 @@ public class Utils {
      * @param droneID is the ID of the drone.
      */
     public static void deleteAllCurrentPhotos(String droneID){
+        logger.info("All photos received from " + droneID + " deleted.");
         for(int i=0;i<Utils.getDronePosition(droneID).getImages().size();i++){
             deletePhoto(Utils.getDronePosition(droneID).getImages().get(i) + ".png");
         }

@@ -7,6 +7,8 @@ import MTADroneService.DroneService.application.services.TokenService;
 import MTADroneService.DroneService.application.services.UserService;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     /**
      * Method createUser.
@@ -63,6 +66,7 @@ public class UserServiceImpl implements UserService {
         userDAO.save(userModel);
         userInfoDTO.setPassword("");
         modelMapper.map(userModel, userInfoDTO);
+        logger.info("User service:user created with username " + userInfoDTO.getUsername() + ".");
     }
 
     /**
@@ -76,6 +80,7 @@ public class UserServiceImpl implements UserService {
         if(userModelOptional.isPresent()){
             UserModel userModel = userModelOptional.get();
             if(bCryptPasswordEncoder.matches(userInfoDTO.getPassword(),userModel.getPassword())) {
+                logger.info("User service:user logged in with username " + userInfoDTO.getUsername() + ".");
                 return modelMapper.map(userModel,UserInfoDTO.class);
             }
             else{

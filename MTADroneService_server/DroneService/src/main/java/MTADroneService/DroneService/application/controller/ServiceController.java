@@ -6,6 +6,8 @@ import MTADroneService.DroneService.application.utility.MissionInfoToSend;
 import MTADroneService.DroneService.application.utility.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,8 @@ public class ServiceController {
     @Autowired
     ServiceService serviceService;
 
+    final Logger logger = LoggerFactory.getLogger(ServiceController.class);
+
     /**
      * Method createSearchMission.
      * Creates a SAR mission.
@@ -41,8 +45,9 @@ public class ServiceController {
     @PostMapping(value = "/search")
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createSearchMission(@RequestBody MissionInfoDTO missionInfoDTO,
-                                              @RequestHeader (name="Authorization") String tokenUnstrapped) throws IOException {
 
+                                              @RequestHeader (name="Authorization") String tokenUnstrapped) throws IOException {
+        logger.info("Service controller:Mission SAR on the verge of being created for user with token unstrapped " + tokenUnstrapped + ".");
         String jwtToken = StringUtils.removeStart(Optional.ofNullable(tokenUnstrapped).orElse(""), "Bearer").trim();
         checkNotNull(missionInfoDTO);
         MissionInfoToSend missionInfoToSend = new MissionInfoToSend(missionInfoDTO.getMissionLatitudeEnd(),
@@ -64,6 +69,7 @@ public class ServiceController {
     public MissionInfoDTO createSurveilMission(@RequestBody MissionInfoDTO missionInfoDTO,
                                                @RequestHeader (name="Authorization") String tokenUnstrapped) throws IOException {
 
+        logger.info("Service controller:Mission SURVEIL on the verge of being created for user with token unstrapped " + tokenUnstrapped + ".");
         String jwtToken = StringUtils.removeStart(Optional.ofNullable(tokenUnstrapped).orElse(""), "Bearer").trim();
         checkNotNull(missionInfoDTO);
         MissionInfoToSend missionInfoToSend = new MissionInfoToSend(missionInfoDTO.getMissionLatitudeEnd(),
@@ -84,7 +90,7 @@ public class ServiceController {
     @PreAuthorize("hasAnyRole('USER')")
     public MissionInfoDTO createDeliveryMission(@RequestBody MissionInfoDTO missionInfoDTO,
                                                 @RequestHeader (name="Authorization") String tokenUnstrapped) throws IOException {
-
+        logger.info("Service controller:Mission DELIVERY on the verge of being created for user with token unstrapped " + tokenUnstrapped + ".");
         String jwtToken = StringUtils.removeStart(Optional.ofNullable(tokenUnstrapped).orElse(""), "Bearer").trim();
         checkNotNull(missionInfoDTO);
         MissionInfoToSend missionInfoToSend = new MissionInfoToSend(missionInfoDTO.getMissionLatitudeEnd(),

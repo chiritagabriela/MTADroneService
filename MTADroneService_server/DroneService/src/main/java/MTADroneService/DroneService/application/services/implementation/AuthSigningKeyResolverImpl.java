@@ -1,9 +1,12 @@
 package MTADroneService.DroneService.application.services.implementation;
 
+import MTADroneService.DroneService.application.controller.DroneController;
 import MTADroneService.DroneService.application.services.AuthSigningKeyResolver;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

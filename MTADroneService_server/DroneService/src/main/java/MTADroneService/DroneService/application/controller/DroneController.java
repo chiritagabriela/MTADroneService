@@ -8,6 +8,8 @@ import MTADroneService.DroneService.application.utility.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +40,8 @@ public class DroneController {
     @Autowired
     DroneService droneService;
 
+    final Logger logger = LoggerFactory.getLogger(DroneController.class);
+
     /**
      * Method getCurrentPosition.
      * It's used by interface in order to get drone's current position, status and photos.
@@ -46,6 +50,7 @@ public class DroneController {
     @GetMapping(value = "/get_current_position/{droneID}")
     @PreAuthorize("hasAnyRole('USER')")
     DroneInfoDTO getCurrentPosition(@PathVariable String droneID){
+        logger.info("Drone controller:current position for drone " + droneID + " retrieved.");
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         Optional<DroneModel> droneModelOptional = droneService.getDroneInfo(droneID);
         if(droneModelOptional.isPresent()){
@@ -64,6 +69,7 @@ public class DroneController {
                         Utils.imageNumber.set(0);
                         droneDAO.save(newDrone);
                         droneDAO.deleteByDroneIDAndDroneStatus(droneModelList.get(0).getDroneID(), Utils.DroneStatus.BUSY.toString());
+                        logger.info("Drone controller:current mission details removed.");
                     }
                 }
             }
