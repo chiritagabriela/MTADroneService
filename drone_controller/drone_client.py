@@ -22,8 +22,8 @@ import subprocess
 ####################GLOBAL VARIABLES##########################
 
 id_to_find = 82
-marker_size = 18
-takeoff_height = 2
+marker_size = 28
+takeoff_height = 3
 velocity = .5
 
 aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_ARUCO_ORIGINAL)
@@ -131,12 +131,11 @@ def lander(cap):
     	ids=''
     	corners, ids, rejected = aruco.detectMarkers(image=gray_img,dictionary=aruco_dict,parameters=parameters)
 
-	'''if vehicle.mode!='LAND':
+	if vehicle.mode!='LAND':
         	vehicle.mode=VehicleMode("LAND")
         	while vehicle.mode!='LAND':
             		print('[+]Waiting for drone to enter landing mode.')
             		time.sleep(1)
-	'''
 	try:
 
         	if ids is not None and ids[0] == id_to_find:
@@ -158,14 +157,14 @@ def lander(cap):
             		x_ang = (x_avg - horizontal_res*.5)*(horizontal_fov/horizontal_res)
             		y_ang = (y_avg - vertical_res*.5)*(vertical_fov/vertical_res)
 
-            		'''if vehicle.mode!='LAND':
+            		if vehicle.mode!='LAND':
                 		vehicle.mode = VehicleMode('LAND')
                 	while vehicle.mode!='LAND':
                     		time.sleep(1)
                 	print("[+]Vehicle now in LAND mode.")
-                	send_land_message(x_ang,y_ang)'''
+                	send_land_message(x_ang,y_ang)
             	else:
-                	#send_land_message(x_ang,y_ang)
+                	send_land_message(x_ang,y_ang)
                 	pass
     	except Exception as e:
         	print('[-]Target likely not found. Error: '+str(e))
@@ -213,6 +212,7 @@ def main_programme_thread4(name):
 	lon_to_go = ""
 	mission_type = ""
 
+	#waiting for mission to be started
 	while(lat_to_go == ""):
 		time.sleep(3)
 		response_coord = requests.get('http://172.20.10.2:8888/communication/coordinates_to_go/' + get_mac_address())
@@ -220,24 +220,46 @@ def main_programme_thread4(name):
 		lon_to_go = response_coord.json()['longitudeEnd']
 		mission_type = response_coord.json()['missionType']
 
+	#sending video URL to cloud virtual machine
 	mission_started = 1
 	print("[+]Mission SAR started at coordinates:{lat:"+lat_to_go+"-lon:"+lon_to_go+"}.")
 	send_video_url()
-	#arm_and_takeoff(takeoff_height)
-	#time.sleep(1)
+
+	#arming and taking off
+	arm_and_takeoff(takeoff_height)
+	time.sleep(1)
 	print("[+]Drone up and running.")
+
+	#going to first point UP-RIGHT
 	update_status("FLYING_TO_INTEREST_POINT")
-	time.sleep(30)
-	#simple_goto
+	point_up_right_search = LocationGlobalRelative(float(lat_to_go), float(lon_to_go), float(takeoff_height))
+	vehicle.simple_goto(point_up_right_search)
+
 	update_status("SEARCHING_PERSON")
-	time.sleep(60)
-	#simple_goto
-	#simple_goto
-	#simple_goto
-	#simple_goto
+
+	#going UP_LEFT
+	new_lon = float(lon_to_go) - 0.0000449/math.cos(float(lat_to_go))
+	point_up_left_search = LocationGlobalRelative(float(lat_to_go), new_lon, float(takeoff_height))
+	vehicle.simple_goto(point_up_left_search)
+
+	#going DOWN_LEFT
+	new_lat = float(lat_to_go) - 0.0000449
+	point_down_left_search = LocationGlobalRelative(new_lat, new_lon, float(takeoff_height))
+	vehicle.simple_goto(point_down_left_search)
+
+	#going DOWN_RIGHT
+	point_down_right_search = LocationGlobalRelative(new_lat, new_lon + 0.0000449/math.cos(new_lat), float(takeoff_height))
+	vehicle.simple_goto(point_down_right_search)
+
+	#going UP_RIGHT
+	point_up_right_search = LocationGlobalRelative(float(lat_to_go), float(lon_to_go), float(takeoff_height))
+	vehichle.simple_goto(point_up_right_search)
+
+	#returning to BASE
 	update_status("FLYING_TO_BASE")
-	time.sleep(30)
-	#simple_goto(base)
+	point_to_return = LocationGlobalRelative(float(lat_base), float(lon_base), float(takeoff_height))
+	vehicle.simple_goto(point_to_return)
+
 	ready_to_land = 1
 	update_status("LANDING")
 	print("[+]Drone ready for landing.")
@@ -245,9 +267,8 @@ def main_programme_thread4(name):
 		kill_process("mtadroneservice")
 		kill_process("mjpg_streamer")
 		cap =  WebcamVideoStream(src=0, width=horizontal_res, height=vertical_res).start()
-		#while(vehicle.armed == True):
-			#lander(cap)
-		time.sleep(30)
+		while(vehicle.armed == True):
+			lander(cap)
 		update_status("FINISHED")
 		mission_finished = 1
 
