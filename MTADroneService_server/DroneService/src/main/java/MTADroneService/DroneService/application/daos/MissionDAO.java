@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class defining the mission DAO.
+ *
+ * @author Chirita Gabriela
+ */
 @Repository
 public interface MissionDAO extends MongoRepository<MissionModel,String> {
     List<MissionModel> findByUserID(String userID);

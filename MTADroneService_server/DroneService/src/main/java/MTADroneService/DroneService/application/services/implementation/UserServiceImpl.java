@@ -7,6 +7,8 @@ import MTADroneService.DroneService.application.services.TokenService;
 import MTADroneService.DroneService.application.services.UserService;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,12 +17,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.*;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Class defining the UserService service's implementation.
+ * It is used to implement the business logic for user service.
+ * @author Chirita Gabriela
+ */
 @Service
 public class UserServiceImpl implements UserService {
+
+    /**
+     * Member description
+     */
     @Autowired
     ModelMapper modelMapper;
 
@@ -33,6 +42,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    /**
+     * Method createUser.
+     * It's used to create a new user.
+     * @param userInfoDTO is the information needed from the interface in order to create a new user.
+     */
     @Override
     public void createUser(UserInfoDTO userInfoDTO) {
 
@@ -50,14 +66,21 @@ public class UserServiceImpl implements UserService {
         userDAO.save(userModel);
         userInfoDTO.setPassword("");
         modelMapper.map(userModel, userInfoDTO);
+        logger.info("User service:user created with username " + userInfoDTO.getUsername() + ".");
     }
 
+    /**
+     * Method loginUser.
+     * It's used to login a user.
+     * @param userInfoDTO is the information needed from the interface in order to login a user.
+     */
     @Override
     public UserInfoDTO loginUser(UserInfoDTO userInfoDTO) {
         Optional<UserModel> userModelOptional = userDAO.findByUsername(userInfoDTO.getUsername());
         if(userModelOptional.isPresent()){
             UserModel userModel = userModelOptional.get();
             if(bCryptPasswordEncoder.matches(userInfoDTO.getPassword(),userModel.getPassword())) {
+                logger.info("User service:user logged in with username " + userInfoDTO.getUsername() + ".");
                 return modelMapper.map(userModel,UserInfoDTO.class);
             }
             else{

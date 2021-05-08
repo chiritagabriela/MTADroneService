@@ -1,0 +1,675 @@
+@startuml
+
+title __DRONESERVICE's Class Diagram__\n
+
+  namespace MTADroneService.DroneService.application {
+    class MTADroneService.DroneService.application.DroneServiceApplication {
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    class MTADroneService.DroneService.application.DroneServiceApplication {
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    class MTADroneService.DroneService.application.DroneServiceApplicationTests {
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    class MTADroneService.DroneService.application.DroneServiceApplicationTests {
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      class MTADroneService.DroneService.application.config.BeanConfig {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      class MTADroneService.DroneService.application.config.BeanConfig {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      class MTADroneService.DroneService.application.config.MongoConfig {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      class MTADroneService.DroneService.application.config.MongoConfig {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      class MTADroneService.DroneService.application.config.WebSecurityConfig {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      class MTADroneService.DroneService.application.config.WebSecurityConfig {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      namespace security {
+        class MTADroneService.DroneService.application.config.security.AuthFilter {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      namespace security {
+        class MTADroneService.DroneService.application.config.security.AuthFilter {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      namespace security {
+        class MTADroneService.DroneService.application.config.security.MTADroneServiceAuthProvider {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace config {
+      namespace security {
+        class MTADroneService.DroneService.application.config.security.MTADroneServiceAuthProvider {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.CommunicationController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.CommunicationController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.DroneController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.DroneController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.MissionController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.MissionController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.ServiceController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.ServiceController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.TokenController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.TokenController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.UserController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace controller {
+      class MTADroneService.DroneService.application.controller.UserController {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace daos {
+      interface MTADroneService.DroneService.application.daos.DroneDAO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace daos {
+      interface MTADroneService.DroneService.application.daos.DroneDAO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace daos {
+      interface MTADroneService.DroneService.application.daos.MissionDAO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace daos {
+      interface MTADroneService.DroneService.application.daos.MissionDAO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace daos {
+      interface MTADroneService.DroneService.application.daos.UserDAO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace daos {
+      interface MTADroneService.DroneService.application.daos.UserDAO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace dtos {
+      class MTADroneService.DroneService.application.dtos.DroneInfoDTO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace dtos {
+      class MTADroneService.DroneService.application.dtos.DroneInfoDTO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace dtos {
+      class MTADroneService.DroneService.application.dtos.MissionInfoDTO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace dtos {
+      class MTADroneService.DroneService.application.dtos.MissionInfoDTO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace dtos {
+      class MTADroneService.DroneService.application.dtos.UserInfoDTO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace dtos {
+      class MTADroneService.DroneService.application.dtos.UserInfoDTO {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace exceptions {
+      class MTADroneService.DroneService.application.exceptions.InvalidTokenException {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace exceptions {
+      class MTADroneService.DroneService.application.exceptions.InvalidTokenException {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace exceptions {
+      class MTADroneService.DroneService.application.exceptions.TokenAuthException {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace exceptions {
+      class MTADroneService.DroneService.application.exceptions.TokenAuthException {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace models {
+      class MTADroneService.DroneService.application.models.DroneModel {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace models {
+      class MTADroneService.DroneService.application.models.DroneModel {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace models {
+      class MTADroneService.DroneService.application.models.MissionModel {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace models {
+      class MTADroneService.DroneService.application.models.MissionModel {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace models {
+      class MTADroneService.DroneService.application.models.UserModel {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace models {
+      class MTADroneService.DroneService.application.models.UserModel {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.AuthSigningKeyResolver {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.AuthSigningKeyResolver {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.DroneService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.DroneService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.MissionService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.MissionService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.ServiceService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.ServiceService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.TokenService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.TokenService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.UserService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      interface MTADroneService.DroneService.application.services.UserService {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.AuthSigningKeyResolverImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.AuthSigningKeyResolverImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.DroneServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.DroneServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.MissionServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.MissionServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.ServiceServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.ServiceServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.TokenServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.TokenServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.UserServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace services {
+      namespace implementation {
+        class MTADroneService.DroneService.application.services.implementation.UserServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace utility {
+      class MTADroneService.DroneService.application.utility.DroneCoordinates {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace utility {
+      class MTADroneService.DroneService.application.utility.DroneCoordinates {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace utility {
+      class MTADroneService.DroneService.application.utility.MissionInfoToSend {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace utility {
+      class MTADroneService.DroneService.application.utility.MissionInfoToSend {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace utility {
+      class MTADroneService.DroneService.application.utility.Utils {
+      }
+    }
+  }
+  
+
+  namespace MTADroneService.DroneService.application {
+    namespace utility {
+      class MTADroneService.DroneService.application.utility.Utils {
+      }
+    }
+  }
+  
+
+  MTADroneService.DroneService.application.exceptions.TokenAuthException -up-|> javax.naming.AuthenticationException
+  MTADroneService.DroneService.application.services.implementation.AuthSigningKeyResolverImpl .up.|> AuthSigningKeyResolver
+  MTADroneService.DroneService.application.services.implementation.AuthSigningKeyResolverImpl .up.|> MTADroneService.DroneService.application.services.AuthSigningKeyResolver
+  MTADroneService.DroneService.application.services.implementation.DroneServiceImpl .up.|> MTADroneService.DroneService.application.services.DroneService
+  MTADroneService.DroneService.application.services.implementation.DroneServiceImpl .up.|> DroneService
+  MTADroneService.DroneService.application.services.implementation.MissionServiceImpl .up.|> MissionService
+  MTADroneService.DroneService.application.services.implementation.MissionServiceImpl .up.|> MTADroneService.DroneService.application.services.MissionService
+  MTADroneService.DroneService.application.services.implementation.ServiceServiceImpl .up.|> ServiceService
+  MTADroneService.DroneService.application.services.implementation.ServiceServiceImpl .up.|> MTADroneService.DroneService.application.services.ServiceService
+  MTADroneService.DroneService.application.services.implementation.TokenServiceImpl .up.|> TokenService
+  MTADroneService.DroneService.application.services.implementation.TokenServiceImpl .up.|> MTADroneService.DroneService.application.services.TokenService
+  MTADroneService.DroneService.application.services.implementation.UserServiceImpl .up.|> UserService
+  MTADroneService.DroneService.application.services.implementation.UserServiceImpl .up.|> MTADroneService.DroneService.application.services.UserService
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

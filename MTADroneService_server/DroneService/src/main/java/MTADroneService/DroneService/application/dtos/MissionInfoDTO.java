@@ -6,16 +6,24 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * Class defining the mission DTO.
+ *
+ * @author Chirita Gabriela
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MissionInfoDTO {
+    /**
+     * Member description
+     */
     DroneInfoDTO missionDroneInfo;
     String missionID;
     String missionType;
     String missionLatitudeEnd;
     String missionLongitudeEnd;
-    Date missionDate;
+    String missionDate;
     String missionStatus;
     String missionUserID;
 }

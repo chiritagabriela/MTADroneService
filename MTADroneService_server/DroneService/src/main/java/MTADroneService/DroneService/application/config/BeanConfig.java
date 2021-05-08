@@ -9,6 +9,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * Class defining the source of bean configurations.
+ *
+ * @author Chirita Gabriela
+ */
+
 @Configuration
 public class BeanConfig {
 

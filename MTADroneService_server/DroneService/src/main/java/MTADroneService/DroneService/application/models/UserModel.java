@@ -10,11 +10,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+/**
+ * Class defining the user model.
+ *
+ * @author Chirita Gabriela
+ */
 @Data
 @Document(collection = "user")
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserModel {
+    /**
+     * Member description
+     */
     @Id
     private String userID;
     private String username;
