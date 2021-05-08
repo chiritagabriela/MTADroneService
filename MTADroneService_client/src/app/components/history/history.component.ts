@@ -20,6 +20,7 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 960);
     this.updateHistory();
   }
 

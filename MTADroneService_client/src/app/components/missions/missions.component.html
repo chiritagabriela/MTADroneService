@@ -1,10 +1,11 @@
+  
 <div class="text">Current missions</div>
 <div class="container">
     <h3 style="position: relative;" *ngIf="!missionStart">Currently, there is no mission on the run or no drone available for your mission.</h3>
     <div *ngIf="missionStart" class="box">
         <ul style="list-style-type: none; width: 400px; height: 400px;position: relative;">
             <li style="width: 400px; height: 400px; position:relative"> 
-                <agm-map id="map" [latitude]='lat' [longitude]='long'>
+                <agm-map id="map" [latitude]='lat' [longitude]='long' (triggerResize)="true" [zoom]="12">
                     <agm-marker 
                     *ngFor="let marker of markers" 
                     [latitude]="marker.currentLatitude" 
@@ -14,7 +15,7 @@
                         </agm-info-window>
                 </agm-marker>
                 </agm-map>
-                <a style="position: relative;top:-90%;left:17%;font-size: 25px;" href="https://mtadroneservice.loca.lt/?action=stream"  target="_blank">Click here to see live video</a>
+                <a style="position: relative;top:-90%;left:80%;font-size: 25px;" href="https://mtadroneservice.loca.lt/?action=stream"  target="_blank">Click here to see live video</a>
                 <div class="card">
                     <div class="additional">
                         <div class="user-card">

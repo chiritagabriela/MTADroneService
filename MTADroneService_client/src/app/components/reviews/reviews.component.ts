@@ -10,6 +10,7 @@ export class ReviewsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 960);
   }
 
 }
