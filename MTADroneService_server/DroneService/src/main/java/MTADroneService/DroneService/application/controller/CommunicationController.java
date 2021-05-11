@@ -1,6 +1,4 @@
 package MTADroneService.DroneService.application.controller;
-
-import MTADroneService.DroneService.application.config.WebSecurityConfig;
 import MTADroneService.DroneService.application.daos.MissionDAO;
 import MTADroneService.DroneService.application.models.DroneModel;
 import MTADroneService.DroneService.application.models.MissionModel;

@@ -1,0 +1,89 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: server-service-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/limit-connections: '5'
+    nginx.ingress.kubernetes.io/auth-url: http://server-service.default.svc.cluster.local:8888/token/validate
+    nginx.ingress.kubernetes.io/limit-rps: '2'
+    nginx.ingress.kubernetes.io/limit-rpm: '20'
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - romtadroneservice.mooo.com
+      secretName: mtadroneservice-cert-tls
+  rules:
+    - host: romtadroneservice.mooo.com
+      http:
+        paths:
+          - path: /user/create
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /user/login
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/coordinates_to_go/{droneID}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/store_current_location/{droneID}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/update_mission_status/{droneID}/{newMissionStatus}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/upload/{droneID}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/get_video_url
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/set_video_url/{droneID}/{videoURL}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/get_image/{imageName}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /communication/get_mission_status/{droneID}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /drone/get_current_position/{droneID}
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /missions/current_mission
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /missions/all_missions
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /services/surveil
+            backend:
+              serviceName: server-service
+              servicePort: 8888    
+          - path: /services/delivery
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /services/search
+            backend:
+              serviceName: server-service
+              servicePort: 8888
+          - path: /token/validate
+            backend:
+              serviceName: server-service
+              servicePort: 8888

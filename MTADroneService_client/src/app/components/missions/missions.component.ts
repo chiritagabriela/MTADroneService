@@ -58,7 +58,7 @@ export class MissionsComponent implements OnInit {
           this.imageObject = [];
           this.feDroneImages = [];
           clearInterval(this.pollingInterval);
-          this.router.navigate(['/history']);
+          //this.router.navigate(['/history']);
         }
 
         this.markers[0].currentLatitude = parseInt(data.currentDroneCoordinates.currentLatitude);

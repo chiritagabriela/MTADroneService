@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mtadroneservice-frontend-deployment
+  name: server-deployment
   labels:
-    name: mtadroneservice-frontend-deployment
+    name: server-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: mtadroneservice-frontend
+      name: server
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -17,29 +17,31 @@ spec:
   template:
     metadata:
       labels:
-        name: mtadroneservice-frontend
+        name: server
     spec:
       imagePullSecrets:
         - name:  regcred
       containers:
-        - image:  iamgabrielachrt/mtadroneservice:mtadroneservice-frontend
-          name:  mtadroneservice-frontend
+        - image:  iamgabrielachrt/mtadroneservice:server
+          name:  server
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8888
           env:
             - name:  SPRING_PROFILES_ACTIVE
               value:  prod
           livenessProbe:
             httpGet:
-              path: /
-              port: 80
+              path: /actuator/health
+              port: 8888
             initialDelaySeconds: 30
             periodSeconds: 40
           readinessProbe:
             httpGet:
-              path: /
-              port: 80
+              path: /actuator/health
+              port: 8888
             initialDelaySeconds: 30
             periodSeconds: 40
       restartPolicy: Always
+
+
