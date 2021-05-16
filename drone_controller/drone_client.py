@@ -159,13 +159,13 @@ def lander(cap):
 
             		if vehicle.mode!='LAND':
                 		vehicle.mode = VehicleMode('LAND')
-                	while vehicle.mode!='LAND':
-                    		time.sleep(1)
-                	print("[+]Vehicle now in LAND mode.")
-                	send_land_message(x_ang,y_ang)
-            	else:
-                	send_land_message(x_ang,y_ang)
-                	pass
+                		while vehicle.mode!='LAND':
+                    			time.sleep(1)
+                		print("[+]Vehicle now in LAND mode.")
+                		send_land_message(x_ang,y_ang)
+            		else:
+                		send_land_message(x_ang,y_ang)
+                		pass
     	except Exception as e:
         	print('[-]Target likely not found. Error: '+str(e))
 
@@ -199,7 +199,7 @@ def update_status(status):
 
 	print("[+]Mission status updated to " + status)
 	headers = {'Content-Type':'application/json'}
-	url_to_send = 'http://172.20.10.2:8888/communication/update_mission_status/' + get_mac_address() + '/' + status
+	url_to_send = 'https://romtadroneservice.mooo.com/communication/update_mission_status/' + get_mac_address() + '/' + status
 	response = requests.post(url_to_send, headers = headers)
 
 def main_programme_thread4(name):
@@ -215,7 +215,7 @@ def main_programme_thread4(name):
 	#waiting for mission to be started
 	while(lat_to_go == ""):
 		time.sleep(3)
-		response_coord = requests.get('http://172.20.10.2:8888/communication/coordinates_to_go/' + get_mac_address())
+		response_coord = requests.get('https://romtadroneservice.mooo.com/communication/coordinates_to_go/' + get_mac_address())
 		lat_to_go = response_coord.json()['latitudeEnd']
 		lon_to_go = response_coord.json()['longitudeEnd']
 		mission_type = response_coord.json()['missionType']
@@ -234,32 +234,34 @@ def main_programme_thread4(name):
 	update_status("FLYING_TO_INTEREST_POINT")
 	point_up_right_search = LocationGlobalRelative(float(lat_to_go), float(lon_to_go), float(takeoff_height))
 	vehicle.simple_goto(point_up_right_search)
+	time.sleep(30)
 
 	update_status("SEARCHING_PERSON")
-
+	time.sleep(30)
+	'''
 	#going UP_LEFT
 	new_lon = float(lon_to_go) - 0.0000449/math.cos(float(lat_to_go))
 	point_up_left_search = LocationGlobalRelative(float(lat_to_go), new_lon, float(takeoff_height))
 	vehicle.simple_goto(point_up_left_search)
-
+	time.sleep(15)
 	#going DOWN_LEFT
 	new_lat = float(lat_to_go) - 0.0000449
 	point_down_left_search = LocationGlobalRelative(new_lat, new_lon, float(takeoff_height))
 	vehicle.simple_goto(point_down_left_search)
-
+	time.sleep(15)
 	#going DOWN_RIGHT
 	point_down_right_search = LocationGlobalRelative(new_lat, new_lon + 0.0000449/math.cos(new_lat), float(takeoff_height))
 	vehicle.simple_goto(point_down_right_search)
-
+	time.sleep(15)
 	#going UP_RIGHT
 	point_up_right_search = LocationGlobalRelative(float(lat_to_go), float(lon_to_go), float(takeoff_height))
-	vehichle.simple_goto(point_up_right_search)
-
+	vehicle.simple_goto(point_up_right_search)
+	time.sleep(15)'''
 	#returning to BASE
 	update_status("FLYING_TO_BASE")
 	point_to_return = LocationGlobalRelative(float(lat_base), float(lon_base), float(takeoff_height))
 	vehicle.simple_goto(point_to_return)
-
+	time.sleep(30)
 	ready_to_land = 1
 	update_status("LANDING")
 	print("[+]Drone ready for landing.")
@@ -280,7 +282,7 @@ def send_pos_to_server_thread1(name):
 			time.sleep(3)
 			headers ={'Content-Type': 'application/json'}
 			data_to_send = { 'currentLatitude':vehicle.location.global_relative_frame.lat,'currentLongitude':vehicle.location.global_relative_frame.lon }
-			url_to_send = 'http://172.20.10.2:8888/communication/store_current_location/' + get_mac_address()
+			url_to_send = 'https://romtadroneservice.mooo.com/communication/store_current_location/' + get_mac_address()
 			response = requests.post(url_to_send, data=json.dumps(data_to_send), headers = headers)
 			print("[+]Position:{lat:"+str(vehicle.location.global_relative_frame.lat)+"-lon:"+
 				str(vehicle.location.global_relative_frame.lon)+"} sent to server.")
@@ -291,7 +293,7 @@ def send_video_url():
 		if(video_sent == 1):
 			print("[+]Video URL sent to server.")
 			headers = {'Content-Type':'application/json'}
-			url_to_send = 'http://172.20.10.2:8888/communication/set_video_url/' + get_mac_address() + '/' + 'mtadroneservice.loca.lt'
+			url_to_send = 'https://romtadroneservice.mooo.com/communication/set_video_url/' + get_mac_address() + '/' + 'mtadroneservice.loca.lt'
 			response = requests.post(url_to_send, headers=headers)
 			break
 
