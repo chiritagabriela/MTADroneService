@@ -20,7 +20,7 @@ current position of the drone, and images of people found in that area.
 JAVA JDK 11<br/>
 SPRINGBOOT<br/>
 ANGULAR<br/>
-BOOTSRAP<br/>
+BOOTSTRAP<br/>
 DRONEKIT<br/>
 
 ## Application creator :loudspeaker:
