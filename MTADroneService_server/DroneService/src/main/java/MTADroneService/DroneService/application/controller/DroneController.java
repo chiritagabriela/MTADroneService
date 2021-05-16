@@ -47,7 +47,7 @@ public class DroneController {
      * It's used by interface in order to get drone's current position, status and photos.
      * @param droneID is the unique ID of the drone.
      */
-    @GetMapping(value = "/get_current_position/{droneID}")
+        @GetMapping(value = "/get_current_position/{droneID}")
     @PreAuthorize("hasAnyRole('USER')")
     DroneInfoDTO getCurrentPosition(@PathVariable String droneID){
         logger.info("Drone controller:current position for drone " + droneID + " retrieved.");

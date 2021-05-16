@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthentificationService } from '../../services/authentification.service';
 import { Router } from '@angular/router';
@@ -17,12 +17,14 @@ export class LoginComponent implements OnInit {
   submittedRegister = false;
 
   constructor(private formBuilder: FormBuilder, private authentificationService: AuthentificationService,
-    private router: Router) {
+    private router: Router, public widgetsContent: ElementRef<any>) {
      
       if(this.authentificationService.currentUserValue !== null 
         && this.authentificationService.currentUserValue !== undefined){
           this.router.navigate(['/home']);
         }
+        window.scrollTo(0, 960);
+    
 
   }
 

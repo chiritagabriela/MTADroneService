@@ -30,7 +30,7 @@ export class AuthentificationService {
 
   login(username: string, password:string): Observable<UserModel>{
 
-    const url = "http://localhost:8888/user/login";
+    const url = `https://romtadroneservice.mooo.com/user/login`;
     return this.httpClient.post<UserModel>(url,{username,password})
     .pipe(map(userModel =>{
 
@@ -56,7 +56,7 @@ export class AuthentificationService {
 
   register(formValue:any): Observable<UserModel>{
 
-    const url = "http://localhost:8888/user/create";
+    const url = `https://romtadroneservice.mooo.com/user/create`;
     return this.httpClient.post<UserModel>(url,formValue)
     .pipe(map(userModel =>{
 

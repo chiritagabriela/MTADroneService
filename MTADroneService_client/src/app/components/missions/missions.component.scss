@@ -16,7 +16,7 @@ html, body {
   width: 450px;
   height: 250px;
   top: 70px;
-  left: -40px;
+  left: 55%;
   background-color: #fff;
   background: linear-gradient(#f8f8f8, #fff);
   box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
@@ -219,8 +219,8 @@ html, body {
 
 agm-map{
   position: relative;
-  left: 500px;
-  top: 20px;
+  left: 42%;
+  top: 100%;
   width: 600px;
   height: 400px;
 }
@@ -253,8 +253,8 @@ agm-map{
 
 ng-image-slider{
   position: relative;
-  left:300%;
-  top:-70%;
+  left: 67%;
+  top:100%;
   width: 100px;
   height: 100px;
 }

@@ -23,6 +23,7 @@ export class ServicesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 960);
     this.deliveryForm = this.formBuilder.group({
       missionLatitudeStart:['',Validators.required],
       missionLatitudeEnd:['',Validators.required],

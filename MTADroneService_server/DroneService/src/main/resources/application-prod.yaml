@@ -1,6 +1,18 @@
+server:
+  port: 8888
 
 spring:
   data:
     mongodb:
       uri: mongodb+srv://iamgabrielachrt:QpK4Yg07VYIW6GPZ@mtadroneservice-db.gtyzh.mongodb.net/test?retryWrites=true&w=majority
       database: MTADroneServiceclientsDB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+jwt:
+  secret:
+    key: Asdasdasdasdasdsdakshvdaihsvdaisygfaisfgaiufgasoufdhyaoisfyhaopsifhy

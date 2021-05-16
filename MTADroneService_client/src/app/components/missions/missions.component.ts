@@ -13,8 +13,8 @@ import { saveAs} from 'file-saver';
 })
 export class MissionsComponent implements OnInit {
 
-  lat = 45.943161;
-  long = 24.966761;
+  lat = 45.139659;
+  long = 27.486923;
   pollingInterval!: any;
   droneID = "";
   missionModel!: any;
@@ -35,12 +35,13 @@ export class MissionsComponent implements OnInit {
 
   markers = [
     {
-      currentLatitude: 44.439410,
-      currentLongitude: 26.119320,
+      currentLatitude: 45.139659,
+      currentLongitude: 27.486923,
       label: 'current'
     }];
 
   ngOnInit(): void {
+    window.scrollTo(0, 960);
     this.getCurrentMission();
   }
   
@@ -57,7 +58,7 @@ export class MissionsComponent implements OnInit {
           this.imageObject = [];
           this.feDroneImages = [];
           clearInterval(this.pollingInterval);
-          this.router.navigate(['/history']);
+          //this.router.navigate(['/history']);
         }
 
         this.markers[0].currentLatitude = parseInt(data.currentDroneCoordinates.currentLatitude);

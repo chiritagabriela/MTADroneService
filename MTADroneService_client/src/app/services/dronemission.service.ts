@@ -14,7 +14,7 @@ export class DronemissionService {
   constructor(private httpClient:HttpClient) { }
 
   startSearchMission(formValue:any): Observable<MissionModel>{
-    const url = `http://localhost:8888/services/search`;
+    const url = `https://romtadroneservice.mooo.com/services/search`;
     return this.httpClient.post<MissionModel>(url, formValue)
     .pipe(map(missionModel =>{
       return missionModel;
@@ -23,7 +23,7 @@ export class DronemissionService {
   }
 
   startSurveilMission(formValue:any): Observable<MissionModel>{
-    const url = `http://localhost:8888/services/surveil`;
+    const url = `https://romtadroneservice.mooo.com/services/surveil`;
     return this.httpClient.post<MissionModel>(url, formValue)
     .pipe(map(missionModel =>{
       return missionModel;
@@ -32,7 +32,7 @@ export class DronemissionService {
   }
 
   startDeliveryMission(formValue:any): Observable<MissionModel>{
-    const url = `http://localhost:8888/services/delivery`;
+    const url = `https://romtadroneservice.mooo.com/services/delivery`;
     return this.httpClient.post<MissionModel>(url, formValue)
     .pipe(map(missionModel =>{
       return missionModel;
@@ -41,22 +41,22 @@ export class DronemissionService {
   }
 
   getCurrentPosition(droneId:String): Observable<DroneModel>{
-    const url = `http://localhost:8888/drone/get_current_position/` + droneId;
+    const url = `https://romtadroneservice.mooo.com/drone/get_current_position/` + droneId;
     return this.httpClient.get<DroneModel>(url);
   }
 
   getAllMissions(): Observable<MissionModel>{
-    const url = `http://localhost:8888/missions/all_missions`;
+    const url = `https://romtadroneservice.mooo.com/missions/all_missions`;
     return this.httpClient.get<MissionModel>(url);
   }
 
   getCurrentMission():Observable<MissionModel>{
-    const url = `http://localhost:8888/missions/current_mission/`;
+    const url = `https://romtadroneservice.mooo.com/missions/current_mission/`;
     return this.httpClient.get<MissionModel>(url);
   }
 
   downloadImage(imageName:string) : Observable<any> { 
-    const url = `http://localhost:8888/communication/get_image/` + imageName;
+    const url = `https://romtadroneservice.mooo.com/communication/get_image/` + imageName;
     return this.httpClient.get(url)
   } 
 }
